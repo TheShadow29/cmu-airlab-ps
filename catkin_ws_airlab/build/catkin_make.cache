@@ -1,2 +1,2 @@
 plane_segmentation_tutorial
--DCATKIN_DEVEL_PREFIX=/home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/catkin_ws_airlab/devel -DCMAKE_INSTALL_PREFIX=/home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/catkin_ws_airlab/install -G Unix Makefiles
+-DCATKIN_DEVEL_PREFIX=/home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/catkin_ws_plane_seg/devel -DCMAKE_INSTALL_PREFIX=/home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/catkin_ws_plane_seg/install -G Unix Makefiles
