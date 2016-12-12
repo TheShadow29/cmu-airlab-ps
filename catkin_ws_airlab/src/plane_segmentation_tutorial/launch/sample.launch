@@ -1,0 +1,12 @@
+<!-- -->
+<launch>
+
+  <node pkg="plane_segmentation_tutorial" type="plane_segmentation_tutorial_node" name="plane_segmentation_tutorial_node" output="screen">
+  </node>
+  <node pkg="rosbag" type="play" name="player"
+		args="$(find plane_segmentation_tutorial)/data/2013-02-21-17-59-01.bag"/>
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find plane_segmentation_tutorial)/launch/plane_seg.rviz"/>
+  
+</launch>
+
+
