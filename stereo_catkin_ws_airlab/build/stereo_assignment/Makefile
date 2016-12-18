@@ -405,32 +405,167 @@ stereo_assignment_main/fast:
 	cd /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build && $(MAKE) -f stereo_assignment/CMakeFiles/stereo_assignment_main.dir/build.make stereo_assignment/CMakeFiles/stereo_assignment_main.dir/build
 .PHONY : stereo_assignment_main/fast
 
-src/main.o: src/main.cpp.o
+src/elas/descriptor.o: src/elas/descriptor.cpp.o
 
-.PHONY : src/main.o
+.PHONY : src/elas/descriptor.o
 
 # target to build an object file
-src/main.cpp.o:
-	cd /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build && $(MAKE) -f stereo_assignment/CMakeFiles/stereo_assignment_main.dir/build.make stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/main.cpp.o
-.PHONY : src/main.cpp.o
+src/elas/descriptor.cpp.o:
+	cd /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build && $(MAKE) -f stereo_assignment/CMakeFiles/stereo_assignment_main.dir/build.make stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/elas/descriptor.cpp.o
+.PHONY : src/elas/descriptor.cpp.o
 
-src/main.i: src/main.cpp.i
+src/elas/descriptor.i: src/elas/descriptor.cpp.i
 
-.PHONY : src/main.i
+.PHONY : src/elas/descriptor.i
 
 # target to preprocess a source file
-src/main.cpp.i:
-	cd /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build && $(MAKE) -f stereo_assignment/CMakeFiles/stereo_assignment_main.dir/build.make stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/main.cpp.i
-.PHONY : src/main.cpp.i
+src/elas/descriptor.cpp.i:
+	cd /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build && $(MAKE) -f stereo_assignment/CMakeFiles/stereo_assignment_main.dir/build.make stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/elas/descriptor.cpp.i
+.PHONY : src/elas/descriptor.cpp.i
 
-src/main.s: src/main.cpp.s
+src/elas/descriptor.s: src/elas/descriptor.cpp.s
 
-.PHONY : src/main.s
+.PHONY : src/elas/descriptor.s
 
 # target to generate assembly for a file
-src/main.cpp.s:
-	cd /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build && $(MAKE) -f stereo_assignment/CMakeFiles/stereo_assignment_main.dir/build.make stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/main.cpp.s
-.PHONY : src/main.cpp.s
+src/elas/descriptor.cpp.s:
+	cd /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build && $(MAKE) -f stereo_assignment/CMakeFiles/stereo_assignment_main.dir/build.make stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/elas/descriptor.cpp.s
+.PHONY : src/elas/descriptor.cpp.s
+
+src/elas/elas.o: src/elas/elas.cpp.o
+
+.PHONY : src/elas/elas.o
+
+# target to build an object file
+src/elas/elas.cpp.o:
+	cd /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build && $(MAKE) -f stereo_assignment/CMakeFiles/stereo_assignment_main.dir/build.make stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/elas/elas.cpp.o
+.PHONY : src/elas/elas.cpp.o
+
+src/elas/elas.i: src/elas/elas.cpp.i
+
+.PHONY : src/elas/elas.i
+
+# target to preprocess a source file
+src/elas/elas.cpp.i:
+	cd /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build && $(MAKE) -f stereo_assignment/CMakeFiles/stereo_assignment_main.dir/build.make stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/elas/elas.cpp.i
+.PHONY : src/elas/elas.cpp.i
+
+src/elas/elas.s: src/elas/elas.cpp.s
+
+.PHONY : src/elas/elas.s
+
+# target to generate assembly for a file
+src/elas/elas.cpp.s:
+	cd /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build && $(MAKE) -f stereo_assignment/CMakeFiles/stereo_assignment_main.dir/build.make stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/elas/elas.cpp.s
+.PHONY : src/elas/elas.cpp.s
+
+src/elas/filter.o: src/elas/filter.cpp.o
+
+.PHONY : src/elas/filter.o
+
+# target to build an object file
+src/elas/filter.cpp.o:
+	cd /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build && $(MAKE) -f stereo_assignment/CMakeFiles/stereo_assignment_main.dir/build.make stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/elas/filter.cpp.o
+.PHONY : src/elas/filter.cpp.o
+
+src/elas/filter.i: src/elas/filter.cpp.i
+
+.PHONY : src/elas/filter.i
+
+# target to preprocess a source file
+src/elas/filter.cpp.i:
+	cd /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build && $(MAKE) -f stereo_assignment/CMakeFiles/stereo_assignment_main.dir/build.make stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/elas/filter.cpp.i
+.PHONY : src/elas/filter.cpp.i
+
+src/elas/filter.s: src/elas/filter.cpp.s
+
+.PHONY : src/elas/filter.s
+
+# target to generate assembly for a file
+src/elas/filter.cpp.s:
+	cd /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build && $(MAKE) -f stereo_assignment/CMakeFiles/stereo_assignment_main.dir/build.make stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/elas/filter.cpp.s
+.PHONY : src/elas/filter.cpp.s
+
+src/elas/matrix.o: src/elas/matrix.cpp.o
+
+.PHONY : src/elas/matrix.o
+
+# target to build an object file
+src/elas/matrix.cpp.o:
+	cd /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build && $(MAKE) -f stereo_assignment/CMakeFiles/stereo_assignment_main.dir/build.make stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/elas/matrix.cpp.o
+.PHONY : src/elas/matrix.cpp.o
+
+src/elas/matrix.i: src/elas/matrix.cpp.i
+
+.PHONY : src/elas/matrix.i
+
+# target to preprocess a source file
+src/elas/matrix.cpp.i:
+	cd /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build && $(MAKE) -f stereo_assignment/CMakeFiles/stereo_assignment_main.dir/build.make stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/elas/matrix.cpp.i
+.PHONY : src/elas/matrix.cpp.i
+
+src/elas/matrix.s: src/elas/matrix.cpp.s
+
+.PHONY : src/elas/matrix.s
+
+# target to generate assembly for a file
+src/elas/matrix.cpp.s:
+	cd /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build && $(MAKE) -f stereo_assignment/CMakeFiles/stereo_assignment_main.dir/build.make stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/elas/matrix.cpp.s
+.PHONY : src/elas/matrix.cpp.s
+
+src/elas/triangle.o: src/elas/triangle.cpp.o
+
+.PHONY : src/elas/triangle.o
+
+# target to build an object file
+src/elas/triangle.cpp.o:
+	cd /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build && $(MAKE) -f stereo_assignment/CMakeFiles/stereo_assignment_main.dir/build.make stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/elas/triangle.cpp.o
+.PHONY : src/elas/triangle.cpp.o
+
+src/elas/triangle.i: src/elas/triangle.cpp.i
+
+.PHONY : src/elas/triangle.i
+
+# target to preprocess a source file
+src/elas/triangle.cpp.i:
+	cd /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build && $(MAKE) -f stereo_assignment/CMakeFiles/stereo_assignment_main.dir/build.make stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/elas/triangle.cpp.i
+.PHONY : src/elas/triangle.cpp.i
+
+src/elas/triangle.s: src/elas/triangle.cpp.s
+
+.PHONY : src/elas/triangle.s
+
+# target to generate assembly for a file
+src/elas/triangle.cpp.s:
+	cd /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build && $(MAKE) -f stereo_assignment/CMakeFiles/stereo_assignment_main.dir/build.make stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/elas/triangle.cpp.s
+.PHONY : src/elas/triangle.cpp.s
+
+src/stereo_code.o: src/stereo_code.cpp.o
+
+.PHONY : src/stereo_code.o
+
+# target to build an object file
+src/stereo_code.cpp.o:
+	cd /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build && $(MAKE) -f stereo_assignment/CMakeFiles/stereo_assignment_main.dir/build.make stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/stereo_code.cpp.o
+.PHONY : src/stereo_code.cpp.o
+
+src/stereo_code.i: src/stereo_code.cpp.i
+
+.PHONY : src/stereo_code.i
+
+# target to preprocess a source file
+src/stereo_code.cpp.i:
+	cd /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build && $(MAKE) -f stereo_assignment/CMakeFiles/stereo_assignment_main.dir/build.make stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/stereo_code.cpp.i
+.PHONY : src/stereo_code.cpp.i
+
+src/stereo_code.s: src/stereo_code.cpp.s
+
+.PHONY : src/stereo_code.s
+
+# target to generate assembly for a file
+src/stereo_code.cpp.s:
+	cd /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build && $(MAKE) -f stereo_assignment/CMakeFiles/stereo_assignment_main.dir/build.make stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/stereo_code.cpp.s
+.PHONY : src/stereo_code.cpp.s
 
 # Help Target
 help:
@@ -461,9 +596,24 @@ help:
 	@echo "... install/strip"
 	@echo "... install/local"
 	@echo "... install"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
+	@echo "... src/elas/descriptor.o"
+	@echo "... src/elas/descriptor.i"
+	@echo "... src/elas/descriptor.s"
+	@echo "... src/elas/elas.o"
+	@echo "... src/elas/elas.i"
+	@echo "... src/elas/elas.s"
+	@echo "... src/elas/filter.o"
+	@echo "... src/elas/filter.i"
+	@echo "... src/elas/filter.s"
+	@echo "... src/elas/matrix.o"
+	@echo "... src/elas/matrix.i"
+	@echo "... src/elas/matrix.s"
+	@echo "... src/elas/triangle.o"
+	@echo "... src/elas/triangle.i"
+	@echo "... src/elas/triangle.s"
+	@echo "... src/stereo_code.o"
+	@echo "... src/stereo_code.i"
+	@echo "... src/stereo_code.s"
 .PHONY : help
 
 

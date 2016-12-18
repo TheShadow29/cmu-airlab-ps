@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+  <!--create pc bag -->
+  <!-- <node pkg="create_point_cloud_bag" type="create_point_cloud_bag_node" -->
+  <!-- 		name="create_point_cloud_bag_node" output="screen"/> -->
+  <!-- <arg name="data_json_path" value="../data/data.json"> -->
+  <arg name="data" value="$(find stereo_assignment)/data/data.json"/>
+  <arg name="left_calib" value="$(find stereo_assignment)/data/left_calib.json"/>
+  <arg name="right_calib" value="$(find stereo_assignment)/data/right_calib.json"/>
+  <arg name="img_folder" value="$(find stereo_assignment)/data"/>
+  <node pkg="stereo_assignment" type="stereo_assignment_main"
+		name="stereo_assignment_main" output="screen" args="$(arg data) $(arg left_calib) $(arg right_calib) $(arg img_folder)"/>
+  <!-- <node pkg="rosbag" type="record" name="rosbag_record_pcd_bag" -->
+  <!-- 		args="-o  $(find create_point_cloud_bag)/bag_files/pcd_bag1 /pc_out"/> -->
+  <!-- <node pkg="rviz" type="rviz" name="rviz" args="-d $(find create_point_cloud_bag)/launch/pc_example.rviz"/> -->
+
+</launch>

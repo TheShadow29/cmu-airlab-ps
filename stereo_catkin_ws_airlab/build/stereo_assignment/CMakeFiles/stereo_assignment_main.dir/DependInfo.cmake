@@ -4,7 +4,12 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/src/stereo_assignment/src/main.cpp" "/home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build/stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/main.cpp.o"
+  "/home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/src/stereo_assignment/src/elas/descriptor.cpp" "/home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build/stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/elas/descriptor.cpp.o"
+  "/home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/src/stereo_assignment/src/elas/elas.cpp" "/home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build/stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/elas/elas.cpp.o"
+  "/home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/src/stereo_assignment/src/elas/filter.cpp" "/home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build/stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/elas/filter.cpp.o"
+  "/home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/src/stereo_assignment/src/elas/matrix.cpp" "/home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build/stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/elas/matrix.cpp.o"
+  "/home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/src/stereo_assignment/src/elas/triangle.cpp" "/home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build/stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/elas/triangle.cpp.o"
+  "/home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/src/stereo_assignment/src/stereo_code.cpp" "/home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/build/stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/stereo_code.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -17,19 +22,42 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
   "DISABLE_OPENNI2"
   "DISABLE_PCAP"
   "DISABLE_PNG"
-  "DISABLE_VTK"
   "ROSCONSOLE_BACKEND_LOG4CXX"
   "ROS_BUILD_SHARED_LIBS=1"
   "ROS_PACKAGE_NAME=\"stereo_assignment\""
+  "vtkFiltersFlowPaths_AUTOINIT=1(vtkFiltersParallelFlowPaths)"
+  "vtkIOExodus_AUTOINIT=1(vtkIOParallelExodus)"
+  "vtkIOGeometry_AUTOINIT=1(vtkIOMPIParallel)"
+  "vtkIOImage_AUTOINIT=1(vtkIOMPIImage)"
+  "vtkIOSQL_AUTOINIT=2(vtkIOMySQL,vtkIOPostgreSQL)"
+  "vtkRenderingContext2D_AUTOINIT=1(vtkRenderingContextOpenGL)"
+  "vtkRenderingCore_AUTOINIT=4(vtkInteractionStyle,vtkRenderingFreeType,vtkRenderingFreeTypeOpenGL,vtkRenderingOpenGL)"
+  "vtkRenderingFreeType_AUTOINIT=2(vtkRenderingFreeTypeFontConfig,vtkRenderingMatplotlib)"
+  "vtkRenderingLIC_AUTOINIT=1(vtkRenderingParallelLIC)"
+  "vtkRenderingVolume_AUTOINIT=1(vtkRenderingVolumeOpenGL)"
   )
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "/usr/include/vtk-6.2"
+  "/usr/include/freetype2"
+  "/usr/include/x86_64-linux-gnu/freetype2"
+  "/usr/include/x86_64-linux-gnu"
+  "/usr/include/hdf5/openmpi"
+  "/usr/lib/openmpi/include/openmpi/opal/mca/event/libevent2021/libevent"
+  "/usr/lib/openmpi/include/openmpi/opal/mca/event/libevent2021/libevent/include"
+  "/usr/lib/openmpi/include"
+  "/usr/lib/openmpi/include/openmpi"
+  "/usr/include/jsoncpp"
+  "/usr/include/python2.7"
+  "/usr/include/libxml2"
+  "/usr/include/tcl"
   "/opt/ros/kinetic/include"
   "/opt/ros/kinetic/include/opencv"
   "/usr/include/eigen3"
   "/usr/local/include/pcl-1.8"
   "/usr/include/ni"
+  "/home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/src/stereo_assignment/src/elas"
   )
 
 # Targets to which this target links.

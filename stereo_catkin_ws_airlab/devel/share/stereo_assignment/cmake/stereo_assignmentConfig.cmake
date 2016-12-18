@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(stereo_assignment_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/opt/ros/kinetic/include/opencv;/opt/ros/kinetic/include;/usr/include;/usr/include/eigen3;/usr/local/include/pcl-1.8;/usr/include/ni " STREQUAL " ")
+if(NOT "/opt/ros/kinetic/include/opencv;/opt/ros/kinetic/include;/usr/include;/usr/include/eigen3;/usr/local/include/pcl-1.8;/usr/include/ni;/usr/include/vtk-6.2;/usr/include/freetype2;/usr/include/x86_64-linux-gnu/freetype2;/usr/include/x86_64-linux-gnu;/usr/include/hdf5/openmpi;/usr/lib/openmpi/include/openmpi/opal/mca/event/libevent2021/libevent;/usr/lib/openmpi/include/openmpi/opal/mca/event/libevent2021/libevent/include;/usr/lib/openmpi/include;/usr/lib/openmpi/include/openmpi;/usr/include/jsoncpp;/usr/include/python2.7;/usr/include/libxml2;/usr/include/tcl " STREQUAL " ")
   set(stereo_assignment_INCLUDE_DIRS "")
-  set(_include_dirs "/opt/ros/kinetic/include/opencv;/opt/ros/kinetic/include;/usr/include;/usr/include/eigen3;/usr/local/include/pcl-1.8;/usr/include/ni")
+  set(_include_dirs "/opt/ros/kinetic/include/opencv;/opt/ros/kinetic/include;/usr/include;/usr/include/eigen3;/usr/local/include/pcl-1.8;/usr/include/ni;/usr/include/vtk-6.2;/usr/include/freetype2;/usr/include/x86_64-linux-gnu/freetype2;/usr/include/x86_64-linux-gnu;/usr/include/hdf5/openmpi;/usr/lib/openmpi/include/openmpi/opal/mca/event/libevent2021/libevent;/usr/lib/openmpi/include/openmpi/opal/mca/event/libevent2021/libevent/include;/usr/lib/openmpi/include;/usr/lib/openmpi/include/openmpi;/usr/include/jsoncpp;/usr/include/python2.7;/usr/include/libxml2;/usr/include/tcl")
   foreach(idir ${_include_dirs})
     if(IS_ABSOLUTE ${idir} AND IS_DIRECTORY ${idir})
       set(include ${idir})
