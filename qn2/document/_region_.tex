@@ -1,0 +1,132 @@
+\message{ !name(cmu_airlab_report.tex)}\documentclass{article}
+\usepackage[a4paper, tmargin=1in, bmargin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{parskip}
+\usepackage{pdflscape}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{gensymb}
+\usepackage{amsmath}
+
+\newcommand\Problem[1]{
+  \\
+  \textbf{Q#1.}
+}
+\newcommand\Sol[1]{
+  \\
+  \textbf{A#1.}
+}
+
+\title{CMU Airlab Problem Statement}
+\author
+{
+  Arka Sadhu - 140070011\\
+  3rd Year Btech. Electrical Engineering
+}
+\date{December 2016}
+
+\begin{document}
+
+\message{ !name(cmu_airlab_report.tex) !offset(-3) }
+
+\maketitle
+
+\section*{Problem Statement}
+\Problem{1} Name one advantage and one disadvantage of using Euler angles (e.g. Roll-Pitch-Yaw), unit quaternions, rotation matrices and axis/angle representations of rotations.
+\Sol{1}
+\begin{itemize}
+\item Euler Angles:
+  \begin{itemize}
+  \item Advantages:
+
+    \begin{itemize}
+    \item Only 3 parameters need to be stored.
+    \item It is more human understandable and good for decomposing rotations into individual degrees of freedom.
+    \end{itemize}
+
+  \item Disadvantages:
+    \begin{itemize}
+    \item Interpolation is difficult.
+    \item There are ambiguities in the order of Matrix Rotations.
+    \item If the middle rotation is by 90$\degree$, it results in a Gimbal Lock.
+    \end{itemize}
+  \end{itemize}
+  
+\item Unit Quaternions:
+  \begin{itemize}
+  \item Advantages:
+    \begin{itemize}
+    \item There is no ambiguity, no gimbal lock, and interpolation can be done using slerp, producing smooth rotations.
+    \item It requires only 4 parameters to be stored.
+    \item Even translations can be accomodated using Dual Quaternions.
+    \item Computation is efficient for computers.
+    \item Consecutive rotation is simply multiplication of two quternions.
+    \end{itemize}
+
+  \item Disadvantages:
+    \begin{itemize}
+    \item In general it is not easy to visualize Quaternions, and need to be converted to Axis Angle Representation.
+    \item The Quaternion-Algebra is quite involved.
+    \item There exists redundancy, ie two quaternions may imply the same rotation.
+    \end{itemize}
+  \end{itemize}
+
+\item Rotation Matrices
+  \begin{itemize}
+  \item Advantages:
+    \begin{itemize}
+    \item Rotations can be easily concatenated.
+    \item They directly give the new axis of rotations, which may be required in some applications.
+    \item With homogenous coordinates it is very easy to incorporate Translation too.
+    \end{itemize}
+
+  \item Disadvantages:
+    \begin{itemize}
+    \item Rotation Matrices need 9 parameters to be stored.
+    \item The matrices must be orthogonal, and often due to floating point inaccuracy, they do not remain orthogonal, and the elements of the matrix may need to be recomputed.
+    \end{itemize}
+  \end{itemize}
+
+\item Axis Angle Representation
+  \begin{itemize}
+  \item Advantages:
+    \begin{itemize}
+    \item Very easy to visualize.
+    \item Can be very easily converted to quaternions.
+    \end{itemize}
+  \item Disadvantages:
+    \begin{itemize}
+    \item If $\theta = 0$ then axis is arbitrary.
+    \item For $\theta$ and $\theta + 2*k*\pi$ produce the same result.
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\Problem{2} Let $R^a = (\theta_{roll}^a, \theta_{pitch}^a, \theta_{yaw}^a)$ and $R^b = (\theta_{roll}^b, \theta_{pitch}^b, \theta_{yaw}^b)$ be a rotation corresponding to the following Roll-Pitch-Yaw angles (ZYX conventions):
+$$\theta_{roll}^a = \pi/4 \hspace{2.5cm} \theta_{roll}^b = -\pi/3 $$
+$$\theta_{pitch}^a = 0 \hspace{2.5cm} \theta_{roll}^b = 0 $$
+$$\theta_{yaw}^a = \pi/3 \hspace{2.5cm} \theta_{roll}^b = 0 $$
+Compute 3x3 rotation matrices corresponding to $R^a$ and $R^b$. Then compare $R^aR^b$ and $R^bR^a$ and give physical meaning to these two.
+\Sol{2}
+\[
+  Ra =
+  \begin{bmatrix}
+    0.707107 & -0.353553 & 0.612372\\
+ 0.707107 & 0.353553 & -0.612372\\
+        0 & 0.866025  &     0.5\\
+  \end{bmatrix}
+\]
+\\
+\[
+  Rb =
+  \begin{bmatrix}
+          0.5  & 0.866025    &     0\\
+-0.866025   &    0.5     &   -0\\
+       -0    &     0     &    1\\
+  \end{bmatrix}
+\]
+\\
+\end{document}
+
+\message{ !name(cmu_airlab_report.tex) !offset(-132) }

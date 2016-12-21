@@ -1,0 +1,514 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=prv_cmu_airlab_report 2016.12.22)  22 DEC 2016 00:23
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**&prv_cmu_airlab_report _region_.tex
+(./_region_.tex
+LaTeX2e <2016/02/01>
+Babel <3.9q> and hyphenation patterns for 81 language(s) loaded.
+CUSTOMISED FORMAT. Preloaded files:
+        .
+ article.cls    2014/09/29 v1.4h Standard LaTeX document class
+  size10.clo    2014/09/29 v1.4h Standard LaTeX file (size option)
+geometry.sty    2010/09/12 v5.6 Page Geometry
+  keyval.sty    2014/10/28 v1.15 key=value parser (DPC)
+   ifpdf.sty    2011/01/30 v2.3 Provides the ifpdf switch (HO)
+  ifvtex.sty    2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+ ifxetex.sty    2010/09/12 v0.6 Provides ifxetex conditional
+inputenc.sty    2015/03/17 v1.2c Input encoding file
+    utf8.def    2015/12/03 v1.1r UTF-8 support for inputenc
+   t1enc.dfu    2015/12/03 v1.1r UTF-8 support for inputenc
+  ot1enc.dfu    2015/12/03 v1.1r UTF-8 support for inputenc
+  omsenc.dfu    2015/12/03 v1.1r UTF-8 support for inputenc
+graphicx.sty    2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+graphics.sty    2016/01/03 v1.0q Standard LaTeX Graphics (DPC,SPQR)
+    trig.sty    2016/01/03 v1.10 sin cos tan (DPC)
+graphics.cfg    2010/04/23 v1.9 graphics configuration of TeX Live
+  pdftex.def    2011/05/27 v0.06d Graphics/color for pdfTeX
+infwarerr.sty    2010/04/08 v1.3 Providing info/warning/error messages (HO)
+ ltxcmds.sty    2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+ parskip.sty    2001/04/09 non-zero parskip adjustments
+pdflscape.sty    2008/08/11 v0.10 Display of landscape pages in PDF (HO)
+  lscape.sty    2000/10/22 v3.01 Landscape Pages (DPC)
+listings.sty    2015/06/04 1.6 (Carsten Heinz)
+ lstmisc.sty    2015/06/04 1.6 (Carsten Heinz)
+listings.cfg    2015/06/04 1.6 listings configuration
+hyperref.sty    2012/11/06 v6.83m Hypertext links for LaTeX
+hobsub-hyperref.sty    2012/05/28 v1.13 Bundle oberdiek, subset hyperref (HO)
+hobsub-generic.sty    2012/05/28 v1.13 Bundle oberdiek, subset generic (HO)
+  hobsub.sty    2012/05/28 v1.13 Construct package bundles (HO)
+ifluatex.sty    2010/03/01 v1.3 Provides the ifluatex switch (HO)
+ intcalc.sty    2007/09/27 v1.1 Expandable calculations with integers (HO)
+etexcmds.sty    2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+kvsetkeys.sty    2012/04/25 v1.16 Key value parser (HO)
+kvdefinekeys.sty    2011/04/07 v1.3 Define keys (HO)
+pdftexcmds.sty    2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO)
+pdfescape.sty    2011/11/25 v1.13 Implements pdfTeX's escape features (HO)
+bigintcalc.sty    2012/04/08 v1.3 Expandable calculations on big integers (HO)
+  bitset.sty    2011/01/30 v1.1 Handle bit-vector datatype (HO)
+uniquecounter.sty    2011/01/30 v1.2 Provide unlimited unique counter (HO)
+letltxmacro.sty    2010/09/02 v1.4 Let assignment for LaTeX macros (HO)
+ hopatch.sty    2012/05/28 v1.2 Wrapper for package hooks (HO)
+xcolor-patch.sty    2011/01/30 xcolor patch
+atveryend.sty    2011/06/30 v1.8 Hooks at the very end of document (HO)
+atbegshi.sty    2011/10/05 v1.16 At begin shipout hook (HO)
+refcount.sty    2011/10/16 v3.4 Data extraction from label references (HO)
+ hycolor.sty    2011/01/30 v1.7 Color options for hyperref/bookmark (HO)
+ auxhook.sty    2011/03/04 v1.3 Hooks for auxiliary files (HO)
+kvoptions.sty    2011/06/30 v3.11 Key value format for package options (HO)
+  pd1enc.def    2012/11/06 v6.83m Hyperref: PDFDocEncoding definition (HO)
+hyperref.cfg    2002/06/06 v1.2 hyperref configuration of TeXLive
+     url.sty    2013/09/16  ver 3.4  Verb mode for urls, etc.
+ hpdftex.def    2012/11/06 v6.83m Hyperref driver for pdfTeX
+rerunfilecheck.sty    2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
+ gensymb.sty    2003/07/02 v1.0 (WaS)
+ amsmath.sty    2016/03/03 v2.15a AMS math features
+ amstext.sty    2000/06/29 v2.01 AMS text
+  amsgen.sty    1999/11/30 v2.0 generic functions
+  amsbsy.sty    1999/11/29 v1.2d Bold Symbols
+  amsopn.sty    1999/12/14 v2.01 operator names
+        .
+No file _region_.aux.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+(/home/arktheshadow/.emacs.d/elpa/auctex-11.89.7/latex/preview.sty
+Package: preview 2010/02/14 11.89 (AUCTeX/preview-latex)
+
+(/home/arktheshadow/.emacs.d/elpa/auctex-11.89.7/latex/prtightpage.def
+\PreviewBorder=\dimen130
+)
+(/home/arktheshadow/.emacs.d/elpa/auctex-11.89.7/latex/prauctex.def
+No auxiliary output files.
+
+
+\hbadness=\count121
+\hfuzz=\dimen131
+(/home/arktheshadow/.emacs.d/elpa/auctex-11.89.7/latex/prauctex.cfg))
+(/home/arktheshadow/.emacs.d/elpa/auctex-11.89.7/latex/prfootnotes.def)
+\pr@snippet=\count122
+\pr@box=\box30
+\pr@output=\toks24
+
+Preview: Fontsize 10pt
+Preview: PDFoutput 1
+)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(89.62709pt, 418.25368pt, 89.6271pt)
+* v-part:(T,H,B)=(72.26999pt, 700.50687pt, 72.26999pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=418.25368pt
+* \textheight=700.50687pt
+* \oddsidemargin=17.3571pt
+* \evensidemargin=17.3571pt
+* \topmargin=-37.0pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count123
+\scratchdimen=\dimen132
+\scratchbox=\box31
+\nofMPsegments=\count124
+\nofMParguments=\count125
+\everyMPshowfont=\toks25
+\MPscratchCnt=\count126
+\MPscratchDim=\dimen133
+\MPnumerator=\count127
+\makeMPintoPDFobject=\count128
+\everyMPtoPDFconversion=\toks26
+) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+)
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+\c@lstlisting=\count129
+\AtBeginShipoutBox=\box32
+Package hyperref Info: Link coloring OFF on input line 29.
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
+)
+\c@section@level=\count130
+)
+LaTeX Info: Redefining \ref on input line 29.
+LaTeX Info: Redefining \pageref on input line 29.
+LaTeX Info: Redefining \nameref on input line 29.
+LaTeX Info: Redefining \celsius on input line 29.
+Package gensymb Info: Faking symbols for \degree and \celsius on input line 29.
+
+
+
+Package gensymb Warning: Not defining \perthousand.
+
+LaTeX Info: Redefining \ohm on input line 29.
+Package gensymb Info: Using \Omega for \ohm on input line 29.
+
+Package gensymb Warning: Not defining \micro.
+
+ !name(cmu_airlab_report.tex) !offset(-3) 
+! Preview: Snippet 1 started.
+<-><->
+      
+l.35 \section
+             *{Problem Statement}
+Not a real error.
+
+Preview: Tightpage -32891 -32891 32891 32891
+! Preview: Snippet 1 ended.(655359+0x27410673).
+<-><->
+      
+l.35 \section*{Problem Statement}
+                                 
+Not a real error.
+
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.36 \Problem{1}
+                 Name one advantage and one disadvantage of using Euler angl...
+
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 39.
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 39.
+
+! Preview: Snippet 2 started.
+<-><->
+      
+l.52     \item If the middle rotation is by 90$
+                                               \degree$, it results in a Gim...
+
+Not a real error.
+
+! Preview: Snippet 2 ended.(451272+0x301284).
+<-><->
+      
+l.52 ...m If the middle rotation is by 90$\degree$
+                                                  , it results in a Gimbal L...
+
+Not a real error.
+
+[2]
+! Preview: Snippet 3 started.
+<-><->
+      
+l.100     \item If $
+                    \theta = 0$ then axis is arbitrary.
+Not a real error.
+
+! Preview: Snippet 3 ended.(455111+0x1527347).
+<-><->
+      
+l.100     \item If $\theta = 0$
+                                then axis is arbitrary.
+Not a real error.
+
+[3]
+! Preview: Snippet 4 started.
+<-><->
+      
+l.101     \item For $
+                     \theta$ and $\theta + 2*k*\pi$ produce the same result.
+Not a real error.
+
+! Preview: Snippet 4 ended.(455111+0x325860).
+<-><->
+      
+l.101     \item For $\theta$
+                             and $\theta + 2*k*\pi$ produce the same result.
+Not a real error.
+
+[4]
+! Preview: Snippet 5 started.
+<-><->
+      
+l.101     \item For $\theta$ and $
+                                  \theta + 2*k*\pi$ produce the same result.
+Not a real error.
+
+! Preview: Snippet 5 ended.(455111+54613x3451321).
+<-><->
+      
+l.101 ...\item For $\theta$ and $\theta + 2*k*\pi$
+                                                   produce the same result.
+Not a real error.
+
+[5]
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.106 \Problem{2}
+                  Let $R^a = (\theta_{roll}^a, \theta_{pitch}^a, \theta_{yaw...
+
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Preview: Snippet 6 started.
+<-><->
+      
+l.106 \Problem{2} Let $
+                       R^a = (\theta_{roll}^a, \theta_{pitch}^a, \theta_{yaw...
+
+Not a real error.
+
+! Preview: Snippet 6 ended.(491520+274805x6812541).
+<-><->
+      
+l.106 ...ll}^a, \theta_{pitch}^a, \theta_{yaw}^a)$
+                                                   and $R^b = (\theta_{roll}...
+
+Not a real error.
+
+[6]
+! Preview: Snippet 7 started.
+<-><->
+      
+l.106 ... \theta_{pitch}^a, \theta_{yaw}^a)$ and $
+                                                  R^b = (\theta_{roll}^b, \t...
+
+Not a real error.
+
+! Preview: Snippet 7 ended.(556402+274805x6758737).
+<-><->
+      
+l.106 ...ll}^b, \theta_{pitch}^b, \theta_{yaw}^b)$
+                                                   be a rotation correspondi...
+
+Not a real error.
+
+[7]
+! Preview: Snippet 8 started.
+<-><->
+      
+l.107 $
+       $\theta_{roll}^a = \pi/4 \hspace{2.5cm} \theta_{roll}^b = -\pi/3 $$
+Not a real error.
+
+! Preview: Snippet 8 ended.(950272+0x27410673).
+<-><->
+      
+l.107 ...hspace{2.5cm} \theta_{roll}^b = -\pi/3 $$
+                                                  
+Not a real error.
+
+[8]
+! Preview: Snippet 9 started.
+<-><->
+      
+l.108 $
+       $\theta_{pitch}^a = 0 \hspace{2.5cm} \theta_{roll}^b = 0 $$
+Not a real error.
+
+! Preview: Snippet 9 ended.(1037649+0x27410673).
+<-><->
+      
+l.108 ...= 0 \hspace{2.5cm} \theta_{roll}^b = 0 $$
+                                                  
+Not a real error.
+
+[9]
+! Preview: Snippet 10 started.
+<-><->
+      
+l.109 $
+       $\theta_{yaw}^a = \pi/3 \hspace{2.5cm} \theta_{roll}^b = 0 $$
+Not a real error.
+
+! Preview: Snippet 10 ended.(1037649+0x27410673).
+<-><->
+      
+l.109 ...i/3 \hspace{2.5cm} \theta_{roll}^b = 0 $$
+                                                  
+Not a real error.
+
+[10]
+! Preview: Snippet 11 started.
+<-><->
+      
+l.110 ... 3x3 rotation matrices corresponding to $
+                                                  R^a$ and $R^b$. Then compa...
+
+Not a real error.
+
+! Preview: Snippet 11 ended.(447828+0x819711).
+<-><->
+      
+l.110 ... rotation matrices corresponding to $R^a$
+                                                   and $R^b$. Then compare $...
+
+Not a real error.
+
+[11]
+! Preview: Snippet 12 started.
+<-><->
+      
+l.110 ...ion matrices corresponding to $R^a$ and $
+                                                  R^b$. Then compare $R^aR^b...
+
+Not a real error.
+
+! Preview: Snippet 12 ended.(556402+0x765907).
+<-><->
+      
+l.110 ...matrices corresponding to $R^a$ and $R^b$
+                                                  . Then compare $R^aR^b$ an...
+
+Not a real error.
+
+[12]
+! Preview: Snippet 13 started.
+<-><->
+      
+l.110 ...onding to $R^a$ and $R^b$. Then compare $
+                                                  R^aR^b$ and $R^bR^a$ and g...
+
+Not a real error.
+
+! Preview: Snippet 13 ended.(556402+0x1585618).
+<-><->
+      
+l.110 ...to $R^a$ and $R^b$. Then compare $R^aR^b$
+                                                   and $R^bR^a$ and give phy...
+
+Not a real error.
+
+[13]
+! Preview: Snippet 14 started.
+<-><->
+      
+l.110 ...a$ and $R^b$. Then compare $R^aR^b$ and $
+                                                  R^bR^a$ and give physical ...
+
+Not a real error.
+
+! Preview: Snippet 14 ended.(556402+0x1585618).
+<-><->
+      
+l.110 ...$R^b$. Then compare $R^aR^b$ and $R^bR^a$
+                                                   and give physical meaning...
+
+Not a real error.
+
+[14]
+! Preview: Snippet 15 started.
+<-><->
+      
+l.112 \[
+        
+Not a real error.
+
+! Preview: Snippet 15 ended.(2359318+0x19882495).
+<-><->
+      
+l.119 \]
+        
+Not a real error.
+
+[15]
+! Preview: Snippet 16 started.
+<-><->
+      
+l.121 \[
+        
+Not a real error.
+
+! Preview: Snippet 16 ended.(2359318+0x18775851).
+<-><->
+      
+l.128 \]
+        
+Not a real error.
+
+[16]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 130.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 130.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 130.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 130.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 130.
+ ) 
+Here is how much of TeX's memory you used:
+ 912 strings out of 485956
+ 12840 string characters out of 6034763
+ 213948 words of memory out of 5000000
+ 11408 multiletter control sequences out of 15000+600000
+ 9894 words of font info for 36 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 28i,9n,24p,279b,481s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmsy7.pfb>
+Output written on _region_.pdf (16 pages, 64164 bytes).
+PDF statistics:
+ 88 PDF objects out of 1000 (max. 8388607)
+ 62 compressed objects within 1 object stream
+ 1 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+
