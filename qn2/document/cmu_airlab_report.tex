@@ -18,6 +18,7 @@
   \textbf{A#1.}
   \\
 }
+\newcommand\tab[1][0.5cm]{\hspace*{#1}}
 
 \title{CMU Airlab Problem Statement}
 \author
@@ -223,6 +224,37 @@ As expected $q^f = q^a$.
 convert between quaternion q = (x, y, z, w) and angle/axis (n, θ)? Is the conversion
 unique or not? If not, how many?
 \Sol{5}
+Considering the representation of the quaternion as $q = [v \tab s]$, where v is the complex part
+and s is the scalar part. Therefore $v = [x \tab y \tab z]$ and $s = w$.
 
+The axis angle and quaternions are closely related. Assumption is that the quaternion is a unit quaternion.
+\begin{itemize}
+\item Quaternion $[x y z w]$ to Angle Axis $(n,\theta)$:
+  $$\theta = 2 * \cos^{-1} w$$
+  $$n_x = \frac{x}{\sqrt{1 - w^2}}$$
+  $$n_y = \frac{y}{\sqrt{1 - w^2}}$$
+  $$n_z = \frac{z}{\sqrt{1 - w^2}}$$
+\item Angle Axis to Quaternion:
+  $$w = \cos \frac{\theta}{2}$$
+  $$x = \sin \frac{\theta}{2}$$
+  $$y = \sin \frac{\theta}{2}$$
+  $$z = \sin \frac{\theta}{2}$$
+\end{itemize}
 
+Except for the fact that anti-podal Quaternions represent the same rotation there is no other ambiguity, i.e. $q$ and
+$-q$ represent the same axis angle rotation. But this is to be expected since $(n,\theta)$ and $(-n,-\theta)$ also represent
+the same rotation.
+
+\Problem{6} Assuming Euler angles are small, it is very useful to know the approximation:
+$R \approx I + [\omega]_×$ , where $[.]_x$ is the skew-symmetric operator and $\omega$ is the small rotation.
+Now can you write down $\frac{\partial Rv}{\partial w}|_{\omega = 0}$ where $v \in R^3$
+\Sol{6}
+Given that $R \approx I + [\omega]_×$ we deduce : $$Rv \approx v + [\omega]_xv$$
+$$Rv \approx v + \omega \times v$$
+$$Rv \approx v - v \times \omega$$
+$$Rv \approx = v - [v]_x\omega$$
+Now we can differentiate easily, using the fact
+$$\frac{d(a^Tx)}{dx} = a^T$$
+Hence we get
+$$\frac{\partial Rv}{\partial w}|_{\substack{\omega = 0}} = -[v]_x$$
 \end{document}
