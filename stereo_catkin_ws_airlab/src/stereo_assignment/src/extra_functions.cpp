@@ -14,7 +14,7 @@
 #include "opencv2/imgproc/imgproc_c.h"
 #include "opencv2/imgproc/detail/distortion_model.hpp"
 #include "opencv2/calib3d/calib3d_c.h"
-
+#include "map_classes.cpp"
 
 void store_point_cloud_from_mat(pcl::PointCloud<pcl::PointXYZRGB> &pc,const cv::Mat img)
 {
@@ -46,28 +46,7 @@ void store_point_cloud_from_disp_mat(pcl::PointCloud<pcl::PointXYZI> &pc,const c
 		}
 	}
 }
-std::string type2str(int type) {
-	std::string r;
 
-	uchar depth = type & CV_MAT_DEPTH_MASK;
-	uchar chans = 1 + (type >> CV_CN_SHIFT);
-
-	switch ( depth ) {
-    case CV_8U:  r = "8U"; break;
-    case CV_8S:  r = "8S"; break;
-    case CV_16U: r = "16U"; break;
-    case CV_16S: r = "16S"; break;
-    case CV_32S: r = "32S"; break;
-    case CV_32F: r = "32F"; break;
-    case CV_64F: r = "64F"; break;
-    default:     r = "User"; break;
-	}
-
-	r += "C";
-	r += (chans+'0');
-	std::cout << "Type: " << r << std::endl;
-	return r;
-}
 void create_skew_symm_mat(Eigen::Vector3d t, Eigen::Matrix3d &m)
 {
 	// Eigen::Matrix3f m(3,3);
@@ -110,7 +89,7 @@ void compute_fund_mat(cv::Mat &essential_mat,const cv::Mat& left_K,const cv::Mat
 	
 // }
 
-double compute_fc(const cv::Mat* left_k,const cv::Mat* right_k,const cv::Mat* left_d,const cv::Mat* right_d, double img_w, double img_h)
+double compute_fc(const cv::Mat* left_k,const cv::Mat* right_k,const cv::Mat* left_d,const cv::Mat* right_d, float img_w, float img_h)
 {
 	double fc_new = DBL_MAX;
 	for (int k = 0; k < 2; k++)
@@ -143,4 +122,33 @@ void compute_Q(float cx, float cy, float cx_r, float fc, float tx, cv::Mat& Q)
 	Q1 = cv::Mat(4,4,CV_32FC1,q);
 	Q1.convertTo(Q, CV_32FC1);
 	std::cout << "line 108 Q \n" << Q << std::endl;
+}
+
+void create_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen::Vector3d& t_vec, const Eigen::Quaterniond& q_vec, const cv::Mat& left_K,const cv::Mat& right_K, const cv::Mat left_D, const cv::Mat right_D, float left_w, float left_h, int iter, std::string img_folder)
+{
+	Disp_map d;
+	d.compute_disp(left,right);
+
+	cv::Mat essential_mat;
+	cv::Mat fund_mat;
+	compute_essential_matrix(t_vec, q_vec, essential_mat);
+	compute_fund_mat(essential_mat, left_K, right_K, fund_mat);
+
+	double fc = compute_fc(&left_K, &right_K, &left_D,&right_D, left_w, left_h);
+	cv::Mat Q;
+	double tx = t_vec[0];
+	compute_Q(left_K.at<float>(0,2), left_K.at<float>(1,2), right_K.at<float>(0,2), fc, tx, Q);
+
+	Depth_map dm;
+	cv::Mat Z_mat;
+	std::stringstream ss;
+	ss << img_folder << "/o1.pcd";
+	std::string out_file_pcd = ss.str();
+
+	dm.generate_z_map(d,Q,Z_mat);
+	dm.generate_point_cloud(Z_mat, left);
+	dm.write_point_cloud_to_file(out_file_pcd);
+
+	std::cout << "saving a pc to " << out_file_pcd << std::endl;
+	
 }
