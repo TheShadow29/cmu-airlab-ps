@@ -141,14 +141,19 @@ void create_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen:
 
 	Depth_map dm;
 	cv::Mat Z_mat;
-	std::stringstream ss;
-	ss << img_folder << "/o1.pcd";
-	std::string out_file_pcd = ss.str();
-
+	std::stringstream ss_l;
+	std::stringstream ss_r;
+	ss_l << img_folder << "/pair0" << iter << "_left.pcd";
+	ss_r << img_folder << "/pair0" << iter << "_right.pcd";
+	std::string out_file_pcd_l = ss_l.str();
+	std::string out_file_pcd_r = ss_r.str();
+    
 	dm.generate_z_map(d,Q,Z_mat);
 	dm.generate_point_cloud(Z_mat, left);
-	dm.write_point_cloud_to_file(out_file_pcd);
+	dm.write_point_cloud_to_file(out_file_pcd_l);
+	dm.generate_point_cloud(Z_mat, right);
+	dm.write_point_cloud_to_file(out_file_pcd_r);
 
-	std::cout << "saving a pc to " << out_file_pcd << std::endl;
+	std::cout << "saving a pc to " << out_file_pcd_l << std::endl;
 	
 }

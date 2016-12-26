@@ -382,14 +382,14 @@ int main(int argc, char *argv[]) {
 		right_imgs.push_back(cv::imread(right_fnames[i]));
 		if(right_imgs[i].empty()){std::cout << "No right image at index " << i;return -1;}
 	}
-	std::vector<cv::Mat> disp_mat_vec;
-	cv::Ptr<cv::StereoSGBM> sgbm = cv::StereoSGBM::create(0,16,3);
+	// std::vector<cv::Mat> disp_mat_vec;
+	// cv::Ptr<cv::StereoSGBM> sgbm = cv::StereoSGBM::create(0,16,3);
 	// elas_compute_disp(left_imgs[0],right_imgs[0],disp,img_folder);
 	// std::vector<Disp_map> disp_mat_vec;
-	for(int i = 0; i < 1; i++)
+	std::cout << "line 389 " << left_imgs.size() << std::endl;
+	for(int i = 0; i < left_imgs.size(); i++)
 	{
 	    create_pcd_one_pair(left_imgs[i], right_imgs[i], t_vec[i],q_vec[i], left_K, right_K, left_D, right_D, left_w, left_h, i, img_folder);
-		
 	}
 	// Disp_map d;
 	// std::cout << "line 389 \n";
