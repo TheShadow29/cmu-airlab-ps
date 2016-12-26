@@ -1,6 +1,5 @@
 #include <Eigen/Core>
 #include <Eigen/Geometry>
-
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 
@@ -8,6 +7,8 @@
 
 #include <pcl/point_cloud.h>
 #include <pcl/io/pcd_io.h>
+
+#include "extra_functions.cpp"
 
 #include "opencv2/calib3d/calib3d.hpp"
 #include "opencv2/imgproc.hpp"
@@ -19,6 +20,7 @@
 #include <iostream>
 #include "elas/elas.h"
 #include "elas/image.h"
+#include "map_classes.cpp"
 
 /**
  * Load data for this assignment.
@@ -35,7 +37,10 @@ int P1_slide_val = 600;
 void LoadMetadata(const std::string& fname,
                   std::vector<std::string>& left_fnames,
                   std::vector<std::string>& right_fnames,
-                  std::vector<Eigen::Affine3d>& poses, std::string img_folder) {
+                  std::vector<Eigen::Affine3d>& poses,
+				  std::vector<Eigen::Vector3d>& t_vec,
+				  std::vector<Eigen::Quaterniond>& q_vec,
+				  std::string img_folder) {
 	namespace bpt = boost::property_tree;
 	bpt::ptree pt;
 	bpt::read_json(fname, pt);
@@ -51,10 +56,12 @@ void LoadMetadata(const std::string& fname,
 		Eigen::Vector3d t(entry.get<double>("pose.translation.x"),
 						  entry.get<double>("pose.translation.y"),
 						  entry.get<double>("pose.translation.z"));
+		t_vec.push_back(t);
 		Eigen::Quaterniond q(entry.get<double>("pose.rotation.w"),
 							 entry.get<double>("pose.rotation.x"),
 							 entry.get<double>("pose.rotation.y"),
 							 entry.get<double>("pose.rotation.z"));
+		q_vec.push_back(q);
 		Eigen::Affine3d aff = Eigen::Translation3d(t) * q;
 		poses.push_back(aff);
 	}
@@ -123,7 +130,7 @@ void LoadCalibration(const std::string& fname,
  * this is just a suggestion, you can
  * organize your program anyway you like.
  */
-void ComputeDisparity(const cv::Mat& left, const cv::Mat& right, cv::Mat& disp)
+void ComputeDisparity(const cv::Mat& left, const cv::Mat& right, cv::Mat& disp, cv::Ptr<cv::StereoSGBM> &sgbm)
 {
 //	disp = left;
 	/*
@@ -164,38 +171,55 @@ void ComputeDisparity(const cv::Mat& left, const cv::Mat& right, cv::Mat& disp)
 	  It will consume O(W*H*numDisparities) bytes, which is large for 640x480 stereo and huge for HD-size 
 	  pictures. By default, it is set to false .
 
-	 */
-	cv::Mat disp1;
-	int minDisparity = 0;
-	int numberOfDisparities = 64;
-	int blockSize = 5;
+	*/
 	
-	cv::Ptr<cv::StereoSGBM> sgbm = cv::StereoSGBM::create(minDisparity,numberOfDisparities,blockSize);
-	sgbm -> setPreFilterCap(1);
-	sgbm -> setUniquenessRatio(0);
-	sgbm -> setSpeckleWindowSize(0);
-	sgbm -> setSpeckleRange(0);
-	sgbm ->setDisp12MaxDiff(-1);
-	sgbm -> setP1(0);
-	sgbm -> setP2(0);
-	sgbm -> setMode(0); //3 way
-	sgbm -> compute(left, right,disp1);
-	disp1.convertTo(disp,8);
+	// cv::Ptr<cv::StereoSGBM> sgbm = cv::StereoSGBM::create(minDisparity,numberOfDisparities,blockSize);
+	int block_size = 5;
+	
+	sgbm->setPreFilterCap(63);
+	int sgbmWinSize = block_size > 0 ? block_size : 3;
+	int numberOfDisparities = 64;
+	sgbm->setBlockSize(sgbmWinSize);
 
+    int cn = left.channels();
+	cv::Size img_size = left.size();
+	numberOfDisparities = numberOfDisparities > 0 ? numberOfDisparities : ((img_size.width/8) + 15) & -16;
 
-	// sgbm->setPreFilterCap(63);
-	// sgbm->setBlockSize(sgbmWinSize);
+    sgbm->setP1(8*cn*sgbmWinSize*sgbmWinSize);
+    sgbm->setP2(32*cn*sgbmWinSize*sgbmWinSize);
+    sgbm->setMinDisparity(0);
+    sgbm->setNumDisparities(numberOfDisparities);
+    sgbm->setUniquenessRatio(10);
+    sgbm->setSpeckleWindowSize(100);
+    sgbm->setSpeckleRange(32);
+    sgbm->setDisp12MaxDiff(1);
+	int alg = 2;
+    if(alg==0)
+        sgbm->setMode(cv::StereoSGBM::MODE_HH);
+    else if(alg==1)
+        sgbm->setMode(cv::StereoSGBM::MODE_SGBM);
+    else if(alg==2)
+        sgbm->setMode(cv::StereoSGBM::MODE_SGBM_3WAY);
 
-	// sgbm->setP1(8*cn*sgbmWinSize*sgbmWinSize);
-    // sgbm->setP2(32*cn*sgbmWinSize*sgbmWinSize);
-    // sgbm->setMinDisparity(0);
-    // sgbm->setNumDisparities(numberOfDisparities);
-    // sgbm->setUniquenessRatio(10);
-    // sgbm->setSpeckleWindowSize(100);
-    // sgbm->setSpeckleRange(32);
-    // sgbm->setDisp12MaxDiff(1);
-	// sgbm->setMode(cv::StereoSGBM::MODE_HH);
-	// sgbm->compute(left,right,disp);
+	cv::Mat disp1;
+	cv::Mat disp2;
+	sgbm -> compute(left,right,disp1);
+	disp1.convertTo(disp2,CV_8U,255/(numberOfDisparities*16.));
+
+	disp1.convertTo(disp, CV_32FC1,255/(numberOfDisparities*256*16.));
+	if(false)
+	{
+		// cv::namedWindow("left", 1);
+		// cv::imshow("left", left);
+		// cv::namedWindow("right", 1);
+		// cv::imshow("right", right);
+		cv::namedWindow("disp1",0);
+		cv::imshow("disp1",disp2);
+		cv::namedWindow("disparity", 0);
+		cv::imshow("disparity", disp);
+		cv::waitKey(0);
+	}
+
 }
 void process (const char* file_1,const char* file_2) {
 	using namespace std;
@@ -271,6 +295,42 @@ void process (const char* file_1,const char* file_2) {
 	free(D2_data);
 }
 
+void elas_compute_disp(const cv::Mat& left, const cv::Mat& right, cv::Mat& disp, std::string img_folder)
+{
+	std::vector<int> compression_params;
+	std::string f1 = img_folder + "/x1000_left.pgm";
+	std::string f2 = img_folder + "/x1000_right.pgm";
+	cv::Mat im1, im2;
+	cv::cvtColor(left, im1,cv::COLOR_BGR2GRAY);
+	cv::cvtColor(right, im2,cv::COLOR_BGR2GRAY);	
+    compression_params.push_back(CV_IMWRITE_PXM_BINARY);
+    compression_params.push_back(1);
+	cv::imwrite(f1.c_str(), im1, compression_params);
+	cv::imwrite(f2.c_str(), im2, compression_params);
+	
+	process(f1.c_str(), f2.c_str());
+}
+
+
+void store_point_cloud_from_mat3d(pcl::PointCloud<pcl::PointXYZRGB> &pc,const cv::Mat img_3d, const cv::Mat orig_img_left)
+{
+	for (int i=0; i < img_3d.rows; ++i)
+	{
+		for (int j=0; j < img_3d.cols; ++j)
+		{
+			pcl::PointXYZRGB p;
+			cv::Vec3b ptxyz(img_3d.at<cv::Vec3b>(i,j));
+			p.x = ptxyz[0];
+			p.y = ptxyz[1];
+			p.z = ptxyz[2];
+			cv::Vec3b bgr(orig_img_left.at<cv::Vec3b>(i, j));
+			p.b = bgr[0];
+			p.g = bgr[1];
+			p.r = bgr[2];
+			pc.push_back( p );
+		}
+	}
+}
 
 int main(int argc, char *argv[]) {
 
@@ -287,8 +347,11 @@ int main(int argc, char *argv[]) {
 	// load metadata
 	std::vector<std::string> left_fnames, right_fnames;
 	std::vector<Eigen::Affine3d> poses;
-	LoadMetadata(argv[1], left_fnames, right_fnames, poses,img_folder);
+	std::vector<Eigen::Vector3d>t_vec;
+	std::vector<Eigen::Quaterniond>q_vec;
+	LoadMetadata(argv[1], left_fnames, right_fnames, poses,t_vec, q_vec,img_folder);
 
+	std::cout << "line 345\n " << poses[0].matrix() << std::endl;
 
 	// load calibration info.
 	// note: you should load right as well
@@ -300,6 +363,7 @@ int main(int argc, char *argv[]) {
 	cv::Mat right_D, right_K, right_R, right_P;
 	LoadCalibration(argv[3], right_w, right_h, right_D, right_K, right_R, right_P);
 
+	// std::cout << "line 349 right_D" << right_D << " right_K " << right_K << " right_R " << right_R << " right_P " << right_P << std::endl;
 	// here you should load the images from their filenames
 
 	// NOTE: make sure you run the program from the data/ directory
@@ -318,75 +382,80 @@ int main(int argc, char *argv[]) {
 		right_imgs.push_back(cv::imread(right_fnames[i]));
 		if(right_imgs[i].empty()){std::cout << "No right image at index " << i;return -1;}
 	}
-
-	// cv::Mat left = cv::imread(left_fnames[0]);
-	// if (left.empty()) {
-	// 	std::cerr << "image not found.\n";
-	// 	return -1;
-	// } else {
-	// 	std::cout << "loaded image file with size " << left.cols << "x" << left.rows << "\n";
+	std::vector<cv::Mat> disp_mat_vec;
+	cv::Ptr<cv::StereoSGBM> sgbm = cv::StereoSGBM::create(0,16,3);
+//	elas_compute_disp(left_imgs[0],right_imgs[0],disp,img_folder);
+	Disp_map d;
+	std::cout << "line 389 \n";
+	d.compute_disp(left_imgs[0],right_imgs[0]);
+	disp_mat_vec.push_back(d.disp_img);
+	// for(int i=0; i < left_imgs.size(); i++)
+	// {
+	// 	cv::Mat disp_temp;
+	// 	ComputeDisparity(left_imgs[i], right_imgs[i], disp_temp,sgbm);
+	// 	disp_mat_vec.push_back(disp_temp);
+	// 	// cv::namedWindow("disparity", 0);
+	// 	// cv::imshow("disparity", disp_mat_vec[i]);
+	// 	// cv::waitKey(0);
 	// }
-	
-	// then you should do some stereo magic. Feel free to use
-	// OpenCV, other 3rd party library or roll your own.
-
-
-	cv::Mat disp;
-	
-
-	// cv::namedWindow("Left0", cv::WINDOW_AUTOSIZE);
-	// cv::imshow("Left0",left_imgs[0]);
-	// // cv::waitKey(0);
-	// cv::namedWindow("Right0", cv::WINDOW_AUTOSIZE);
-	// cv::imshow("Right0",right_imgs[0]);
-
-	// cv::namedWindow("Disp", cv::WINDOW_AUTOSIZE);
-
-
-	// ComputeDisparity(left_imgs[0], right_imgs[0], disp);
+	std::cout << "line 400 \n";
+	cv::namedWindow("disp",0);
+	cv::imshow("disp",d.disp_img);
+	cv::waitKey(0);
 	// cv::imshow("Disp",disp);
 	// cv::waitKey(0);
-	std::vector<int> compression_params;
-	std::string f1 = img_folder + "/x1000_left.pgm";
-	std::string f2 = img_folder + "/x1000_right.pgm";
-	cv::Mat im1, im2;
-	cv::cvtColor(left_imgs[0], im1,cv::COLOR_BGR2GRAY);
-	cv::cvtColor(right_imgs[0], im2,cv::COLOR_BGR2GRAY);	
-    compression_params.push_back(CV_IMWRITE_PXM_BINARY);
-    compression_params.push_back(1);
-	cv::imwrite(f1.c_str(), im1, compression_params);
-	cv::imwrite(f2.c_str(), im2, compression_params);
-	
-	process(f1.c_str(), f2.c_str());
+	// int typ1 = left_imgs[0].type();
+	// std::string s1 = type2str(typ1);
 // etc.
 
 	// finally compute the output point cloud from one or more stereo pairs.
 	//
 	// This is just a silly example of creating a colorized XYZ RGB point cloud.
 	// open it with pcl_viewer. then press 'r' and '5' to see the rgb.
-	// disp = left_imgs[0];
+
+	// disp2 = left_imgs[0];
+
 	// pcl::PointCloud<pcl::PointXYZRGB> pc;
-	// for (int i=0; i < disp.rows; ++i) {
-	// 	for (int j=0; j < disp.cols; ++j) {
-	// 		pcl::PointXYZRGB p;
-	// 		p.x = j;
-	// 		p.y = i;
-	// 		p.z = 1;
-	// 		cv::Vec3b bgr(disp.at<cv::Vec3b>(i, j));
-	// 		p.b = bgr[0];
-	// 		p.g = bgr[1];
-	// 		p.r = bgr[2];
-	// 		pc.push_back( p );
-	// 	}
-	// }
+	pcl::PointCloud<pcl::PointXYZI>pc;
+	
+	cv::Mat three_d_img;
+	
+	// cv::reprojectImageTo3D(disp_mat_vec[0],three_d_img,Q,true);
+	cv::Mat essential_mat;
+	cv::Mat fund_mat;
+	compute_essential_matrix(t_vec[0], q_vec[0], essential_mat);
+	compute_fund_mat(essential_mat, left_K, right_K, fund_mat);
 
-
-	// //pcl::io::savePCDFileASCII("out.pcd", pc);
+	
+	double fc = compute_fc(&left_K, &right_K, &left_D, &right_D, left_w, left_h);
+	std::cout << "line 422 " << fc << std::endl;
+	// cv::Mat_<float> Q;
+	cv::Mat Q;
+	double tx = t_vec[0][0];
+	compute_Q(left_K.at<float>(0,2), left_K.at<float>(1,2), right_K.at<float>(0,2), fc, tx, Q);
+	std::cout << "line 435 Q\n" << Q << std::endl;
+	Depth_map dm;
+	cv::Mat Z_mat;
+	std::string out_file_pcd = img_folder + "/out.pcd";
+	dm.generate_z_map(d,Q,Z_mat);
+	dm.generate_point_cloud(Z_mat, left_imgs[0]);
+	dm.write_point_cloud_to_file(out_file_pcd);
+	
+	// cv::reprojectImageTo3D(disp_mat_vec[0],three_d_img,Q,true);
+	// std::cout << "line 428 three_d\n " << three_d_img << std::endl;
+	// cv::namedWindow("3dI");
+	// cv::imshow("3dI",three_d_img);
+	// cv::waitKey(0);
+	
+	// store_point_cloud_from_mat(pc,disp_mat_vec[0]);
+	// store_point_cloud_from_mat(pc,left_imgs[0]);
+	// store_point_cloud_from_mat3d(pc, three_d_img,left_imgs[0]);
+	// store_point_cloud_from_disp_mat(pc,disp_mat_vec[0]);
 	// pcl::PCDWriter w;
-	// std::string out_file_pcd = img_folder + "/out.pcd";
-	// std::cout << "saving a pointcloud to " << out_file_pcd << std::endl;
+	
+	std::cout << "saving a pointcloud to " << out_file_pcd << std::endl;
 	// w.writeBinaryCompressed(out_file_pcd.c_str(), pc);
 	//pcl::io::savePCDBinaryCompressed("out.pcd", pc);
-
+	// std::cout << s1;
 	return 0;
 }

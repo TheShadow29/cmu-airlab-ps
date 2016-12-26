@@ -59,4 +59,16 @@ int main()
 	std::cout << "qe\n" << qe.w() << "\n" << qe.vec() << std::endl;
 	std::cout << "qf\n" << qf.w() << "\n" << qf.vec() << std::endl;
 
+	///Delete After USE////
+	// Eigen::Quaternionf r_temp(0.31311882274025854, -0.46767485128202446,-0.6663116089873752,0.48914790815534087);
+	// Eigen::Matrix3f m;
+	// m = r_temp.matrix();
+	// std::cout << "Final M \n" << m << std::endl
+
+	// Eigen::Vector3d t(-180.1755129055455, -36.60106683086962, 197.61726142488027);
+	// Eigen::Affine3d aff;
+	// Eigen::Translation3d g(t);
+	// aff = g;
+	// std::cout << "Aff " << aff.matrix() << std::endl;
+
 }

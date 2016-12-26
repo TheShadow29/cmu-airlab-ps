@@ -36,9 +36,15 @@ FILE(GLOB LIBELAS_SRC_FILES "src/elas/*.cpp")
 				  
 ## Declare a cpp executable
 add_executable(stereo_assignment_main src/stereo_code.cpp ${LIBELAS_SRC_FILES})
-target_link_libraries( stereo_assignment_main
+# add_executable(stereo_match src/stereo_match.cpp)
+target_link_libraries( stereo_assignment_main 
     ${catkin_LIBRARIES}
     ${PCL_LIBRARIES}
     ${OpenCV_LIBRARIES}
     ${Boost_LIBRARIES})
+# target_link_libraries( stereo_match
+#     ${catkin_LIBRARIES}
+#     ${PCL_LIBRARIES}
+#     ${OpenCV_LIBRARIES}
+#     ${Boost_LIBRARIES})
 
