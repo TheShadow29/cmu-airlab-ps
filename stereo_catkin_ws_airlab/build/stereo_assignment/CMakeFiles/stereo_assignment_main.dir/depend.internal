@@ -95,6 +95,8 @@ stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/stereo_code.cpp.o
  /opt/ros/kinetic/include/rosconsole/macros_generated.h
  /usr/include/eigen3/Eigen/Cholesky
  /usr/include/eigen3/Eigen/Core
+ /usr/include/eigen3/Eigen/Dense
+ /usr/include/eigen3/Eigen/Eigenvalues
  /usr/include/eigen3/Eigen/Geometry
  /usr/include/eigen3/Eigen/Householder
  /usr/include/eigen3/Eigen/Jacobi
@@ -223,6 +225,25 @@ stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/stereo_code.cpp.o
  /usr/include/eigen3/Eigen/src/Core/util/ReenableStupidWarnings.h
  /usr/include/eigen3/Eigen/src/Core/util/StaticAssert.h
  /usr/include/eigen3/Eigen/src/Core/util/XprHelper.h
+ /usr/include/eigen3/Eigen/src/Eigenvalues/./ComplexSchur.h
+ /usr/include/eigen3/Eigen/src/Eigenvalues/./HessenbergDecomposition.h
+ /usr/include/eigen3/Eigen/src/Eigenvalues/./RealQZ.h
+ /usr/include/eigen3/Eigen/src/Eigenvalues/./RealSchur.h
+ /usr/include/eigen3/Eigen/src/Eigenvalues/./Tridiagonalization.h
+ /usr/include/eigen3/Eigen/src/Eigenvalues/ComplexEigenSolver.h
+ /usr/include/eigen3/Eigen/src/Eigenvalues/ComplexSchur.h
+ /usr/include/eigen3/Eigen/src/Eigenvalues/ComplexSchur_MKL.h
+ /usr/include/eigen3/Eigen/src/Eigenvalues/EigenSolver.h
+ /usr/include/eigen3/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h
+ /usr/include/eigen3/Eigen/src/Eigenvalues/GeneralizedSelfAdjointEigenSolver.h
+ /usr/include/eigen3/Eigen/src/Eigenvalues/HessenbergDecomposition.h
+ /usr/include/eigen3/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h
+ /usr/include/eigen3/Eigen/src/Eigenvalues/RealQZ.h
+ /usr/include/eigen3/Eigen/src/Eigenvalues/RealSchur.h
+ /usr/include/eigen3/Eigen/src/Eigenvalues/RealSchur_MKL.h
+ /usr/include/eigen3/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h
+ /usr/include/eigen3/Eigen/src/Eigenvalues/SelfAdjointEigenSolver_MKL.h
+ /usr/include/eigen3/Eigen/src/Eigenvalues/Tridiagonalization.h
  /usr/include/eigen3/Eigen/src/Geometry/AlignedBox.h
  /usr/include/eigen3/Eigen/src/Geometry/AngleAxis.h
  /usr/include/eigen3/Eigen/src/Geometry/EulerAngles.h
@@ -283,6 +304,7 @@ stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/stereo_code.cpp.o
  /usr/include/x86_64-linux-gnu/sys/select.h
  /usr/include/x86_64-linux-gnu/sys/time.h
  /usr/include/x86_64-linux-gnu/sys/timeb.h
+ /usr/local/include/pcl-1.8/pcl/ModelCoefficients.h
  /usr/local/include/pcl-1.8/pcl/PCLHeader.h
  /usr/local/include/pcl-1.8/pcl/PCLImage.h
  /usr/local/include/pcl-1.8/pcl/PCLPointCloud2.h
@@ -291,16 +313,26 @@ stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/stereo_code.cpp.o
  /usr/local/include/pcl-1.8/pcl/PolygonMesh.h
  /usr/local/include/pcl-1.8/pcl/TextureMesh.h
  /usr/local/include/pcl-1.8/pcl/Vertices.h
+ /usr/local/include/pcl-1.8/pcl/cloud_iterator.h
+ /usr/local/include/pcl-1.8/pcl/common/centroid.h
  /usr/local/include/pcl-1.8/pcl/common/concatenate.h
  /usr/local/include/pcl-1.8/pcl/common/copy_point.h
+ /usr/local/include/pcl-1.8/pcl/common/eigen.h
+ /usr/local/include/pcl-1.8/pcl/common/impl/accumulators.hpp
+ /usr/local/include/pcl-1.8/pcl/common/impl/centroid.hpp
  /usr/local/include/pcl-1.8/pcl/common/impl/copy_point.hpp
+ /usr/local/include/pcl-1.8/pcl/common/impl/eigen.hpp
  /usr/local/include/pcl-1.8/pcl/common/impl/io.hpp
+ /usr/local/include/pcl-1.8/pcl/common/impl/transforms.hpp
  /usr/local/include/pcl-1.8/pcl/common/io.h
  /usr/local/include/pcl-1.8/pcl/common/point_tests.h
+ /usr/local/include/pcl-1.8/pcl/common/transforms.h
  /usr/local/include/pcl-1.8/pcl/console/print.h
  /usr/local/include/pcl-1.8/pcl/conversions.h
+ /usr/local/include/pcl-1.8/pcl/correspondence.h
  /usr/local/include/pcl-1.8/pcl/exceptions.h
  /usr/local/include/pcl-1.8/pcl/for_each_type.h
+ /usr/local/include/pcl-1.8/pcl/impl/cloud_iterator.hpp
  /usr/local/include/pcl-1.8/pcl/impl/pcl_base.hpp
  /usr/local/include/pcl-1.8/pcl/impl/point_types.hpp
  /usr/local/include/pcl-1.8/pcl/io/boost.h
@@ -316,3 +348,4 @@ stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/stereo_code.cpp.o
  /usr/local/include/pcl-1.8/pcl/point_traits.h
  /usr/local/include/pcl-1.8/pcl/point_types.h
  /usr/local/include/pcl-1.8/pcl/register_point_struct.h
+ /usr/local/include/pcl-1.8/pcl/registration/transforms.h

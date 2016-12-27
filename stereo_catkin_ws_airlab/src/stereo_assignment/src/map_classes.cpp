@@ -3,6 +3,7 @@
 
 #include <pcl/point_cloud.h>
 #include <pcl/io/pcd_io.h>
+#include <pcl/registration/transforms.h>
 
 #include "opencv2/calib3d/calib3d.hpp"
 #include "opencv2/imgproc.hpp"
@@ -218,4 +219,10 @@ public:
 		w.writeBinaryCompressed(file_name.c_str(), pc2);
 		std::cout << "line 215 \n";
 	}
+
+	void transform_point_cloud(const Eigen::Affine3f& aff)
+	{
+		pcl::transformPointCloud(pc,pc,aff);
+	}
+
 };

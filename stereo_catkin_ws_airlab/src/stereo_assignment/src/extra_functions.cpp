@@ -124,7 +124,7 @@ void compute_Q(float cx, float cy, float cx_r, float fc, float tx, cv::Mat& Q)
 	std::cout << "line 108 Q \n" << Q << std::endl;
 }
 
-void create_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen::Vector3d& t_vec, const Eigen::Quaterniond& q_vec, const cv::Mat& left_K,const cv::Mat& right_K, const cv::Mat left_D, const cv::Mat right_D, float left_w, float left_h, int iter, std::string img_folder)
+void create_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen::Vector3d& t_vec, const Eigen::Quaterniond& q_vec, const cv::Mat& left_K,const cv::Mat& right_K, const cv::Mat left_D, const cv::Mat right_D, float left_w, float left_h, int iter, std::string img_folder,Eigen::Affine3d pose)
 {
 	Disp_map d;
 	d.compute_disp(left,right);
@@ -154,10 +154,17 @@ void create_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen:
 	std::string out_file_pcd_r = ss_r.str();
     
 	dm.generate_z_map(d,Q,Z_mat);
+
 	dm.generate_point_cloud(Z_mat, left);
-	dm.write_point_cloud_to_file(out_file_pcd_l);
-	dm.generate_point_cloud(Z_mat, right);
-	dm.write_point_cloud_to_file(out_file_pcd_r);
+	Eigen::Affine3f pose_new = pose.cast<float>();
+	dm.transform_point_cloud(pose_new);
+	std::stringstream ss2;
+	ss2 << img_folder << "/pcd_files/pair0" << iter <<"_new_left.pcd";
+	dm.write_point_cloud_to_file(ss2.str());
+
+	// dm.generate_point_cloud(Z_mat, right);
+	// dm.write_point_cloud_to_file(out_file_pcd_r);
+
 	// std::stringstream ss1;
 	// ss1 << img_folder << "/pair0" << iter << ".pcd";
 	// dm.reproject_to_3d_opencv(d,Q,left);
@@ -166,4 +173,5 @@ void create_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen:
 	std::cout << "saving a pc to " << out_file_pcd_l << std::endl;
 	
 }
+
 
