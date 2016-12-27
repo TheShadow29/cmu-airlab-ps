@@ -129,6 +129,11 @@ void create_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen:
 	Disp_map d;
 	d.compute_disp(left,right);
 
+
+	std::stringstream ss_o;
+	ss_o << img_folder << "/disp_imgs/disp0" << iter << ".png";
+	d.save_disp_img(ss_o.str());
+	
 	cv::Mat essential_mat;
 	cv::Mat fund_mat;
 	compute_essential_matrix(t_vec, q_vec, essential_mat);
@@ -143,8 +148,8 @@ void create_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen:
 	cv::Mat Z_mat;
 	std::stringstream ss_l;
 	std::stringstream ss_r;
-	ss_l << img_folder << "/pair0" << iter << "_left.pcd";
-	ss_r << img_folder << "/pair0" << iter << "_right.pcd";
+	ss_l << img_folder << "/pcd_files/pair0" << iter << "_left.pcd";
+	ss_r << img_folder << "/pcd_files/pair0" << iter << "_right.pcd";
 	std::string out_file_pcd_l = ss_l.str();
 	std::string out_file_pcd_r = ss_r.str();
     
@@ -153,7 +158,12 @@ void create_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen:
 	dm.write_point_cloud_to_file(out_file_pcd_l);
 	dm.generate_point_cloud(Z_mat, right);
 	dm.write_point_cloud_to_file(out_file_pcd_r);
-
+	// std::stringstream ss1;
+	// ss1 << img_folder << "/pair0" << iter << ".pcd";
+	// dm.reproject_to_3d_opencv(d,Q,left);
+	// dm.write_point_cloud2_to_file(ss1.str());
+	
 	std::cout << "saving a pc to " << out_file_pcd_l << std::endl;
 	
 }
+

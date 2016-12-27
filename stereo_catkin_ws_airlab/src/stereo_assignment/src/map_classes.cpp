@@ -97,11 +97,19 @@ public:
 		sgbm->compute(left_img, right_img, disp_img);
 		// cv::namedWindow("disp1");
 		// cv::imshow("disp1", disp_img);
-		disp_img.convertTo(disp_img, CV_32FC1,255/(num_disp*256*16.));
+		disp_img.convertTo(disp_img, CV_32FC1,1.0/(num_disp*16.));
 		// std::cout << "line 76 Disp_img \n" << disp_img << std::endl;
 		// cv::namedWindow("disp2");
 		// cv::imshow("disp2", disp_img);
-	}	
+		// cv::waitKey();
+	}
+
+	void save_disp_img(std::string file_name)
+	{
+		cv::Mat img_to_save;
+		disp_img.convertTo(img_to_save,CV_8U,255);
+		cv::imwrite(file_name.c_str(),img_to_save);
+	}
 };
 
 
@@ -111,6 +119,7 @@ private:
 public:
 	cv::Mat depth_img;
 	pcl::PointCloud<pcl::PointXYZRGB> pc;
+	pcl::PointCloud<pcl::PointXYZRGB> pc2;
 	Depth_map(){};
 	Depth_map(cv::Mat _depth_img):depth_img(_depth_img){}
 	void generate_z_map(const Disp_map &d,const cv::Mat& Q, cv::Mat& Z_mat)
@@ -119,9 +128,9 @@ public:
 		type2str(Q.type());
 
 		cv::Mat_<float> Qf = Q;
-		std::cout << "line 97 \n" << Qf << std::endl; 
-		cv::Mat_<float> disp_f = d.disp_img;
-		std::cout << "line 99 disp_f\n" << disp_f << std::endl;
+		// std::cout << "line 97 \n" << Qf << std::endl; 
+		cv::Mat_<float> disp_f = d.disp_img; 
+		// std::cout << "line 99 disp_f\n" << disp_f << std::endl;
 		// cv::Mat_<cv::Vec3f> out_pc(disp_f.rows, disp_f.cols);
 		cv::Mat_<float> Z(disp_f.rows, disp_f.cols);
 		cv::Mat_<float> temp_vec1(4,1);
@@ -144,19 +153,22 @@ public:
 		}
 		Z.convertTo(Z_mat, CV_32FC1);
 
-		std::cout << "line 116 v2 \n" << vector_t2[0] << std::endl; 
-		std::cout << "line 117 Z_mat\n" << Z_mat << "line 114 end \n";
+		// std::cout << "line 116 v2 \n" << vector_t2[0] << std::endl; 
+		// std::cout << "line 117 Z_mat\n" << Z_mat << "line 114 end \n";
 	}
 	void generate_point_cloud(cv::Mat Z_mat, cv::Mat left_img)
 	{
+
+		std::cout << "line 153 size of Z_mat \n" << Z_mat.size() << std::endl;
+		std::cout << "line 154 size of left_img \n" << left_img.size() << std::endl;
 		for(int y = 0; y < left_img.rows; y++)
 		{
 			for (int x = 0; x < left_img.cols; x++)
 			{
 				pcl::PointXYZRGB p;
 				p.x = x;
-				p.y = left_img.rows - y;
-				p.z = Z_mat.at<float>(y,x);
+				p.y = -y;
+				p.z = -Z_mat.at<float>(y,x);
 				cv::Vec3b bgr(left_img.at<cv::Vec3b>(y, x));
 				p.b = bgr[0];
 				p.g = bgr[1];
@@ -167,10 +179,43 @@ public:
 		std::cout << "line 133 \n";
 	}
 
+	void reproject_to_3d_opencv(const Disp_map& d,cv::Mat Q,const cv::Mat& left)
+	{
+		cv::Mat three_d_img;
+
+		cv::reprojectImageTo3D(d.disp_img, three_d_img,Q);
+
+		for(int y = 0; y < three_d_img.rows; y++)
+		{
+			for(int x = 0; x < three_d_img.cols; x++)
+			{
+				// std::cout << "line 185 \n";
+				cv::Vec3f point = three_d_img.at<cv::Vec3f>(y,x);
+				// std::cout << "line 187 \n";
+				pcl::PointXYZRGB p;
+				p.x = point[0];
+				p.y = point[1];
+				p.z = point[2];
+				cv::Vec3b bgr(left.at<cv::Vec3b>(y, x));
+				p.b = bgr[0];
+				p.g = bgr[1];
+				p.r = bgr[2];
+				pc2.push_back(p);				
+			}
+		}
+	}
+
 	void write_point_cloud_to_file(std::string file_name)
 	{
 		pcl::PCDWriter w;
 		w.writeBinaryCompressed(file_name.c_str(), pc);
 		std::cout << "line 140 \n";
+	}
+	
+	void write_point_cloud2_to_file(std::string file_name)
+	{
+		pcl::PCDWriter w;
+		w.writeBinaryCompressed(file_name.c_str(), pc2);
+		std::cout << "line 215 \n";
 	}
 };
