@@ -130,97 +130,6 @@ void LoadCalibration(const std::string& fname,
  * this is just a suggestion, you can
  * organize your program anyway you like.
  */
-void ComputeDisparity(const cv::Mat& left, const cv::Mat& right, cv::Mat& disp, cv::Ptr<cv::StereoSGBM> &sgbm)
-{
-//	disp = left;
-	/*
-	  minDisparity	Minimum possible disparity value. Normally, it is zero but sometimes 
-	  rectification algorithms can shift images, so this parameter needs to be adjusted accordingly.
-
-	  numDisparities	Maximum disparity minus minimum disparity. The value is always greater than zero.
-	  In the current implementation, this parameter must be divisible by 16. 
-
-	  blockSize	Matched block size. It must be an odd number >=1 . Normally, it should be somewhere in the 3..11 range.
-	  
-	  P1	The first parameter controlling the disparity smoothness. See below.
-	  
-	  P2	The second parameter controlling the disparity smoothness. The larger the values are, the 
-	  smoother the disparity is. P1 is the penalty on the disparity change by plus or minus 1 between 
-	  neighbor pixels. P2 is the penalty on the disparity change by more than 1 between neighbor pixels.
-	  The algorithm requires P2 > P1 . See stereo_match.cpp sample where some reasonably good P1 and P2 values
-	  are shown (like 8*number_of_image_channels*SADWindowSize*SADWindowSize and 
-	  32*number_of_image_channels*SADWindowSize*SADWindowSize , respectively).
-	  
-	  disp12MaxDiff	Maximum allowed difference (in integer pixel units) in the left-right disparity check. 
-	  Set it to a non-positive value to disable the check.
-	  
-	  preFilterCap	Truncation value for the prefiltered image pixels. The algorithm first computes 
-	  x-derivative at each pixel and clips its value by [-preFilterCap, preFilterCap] interval. The result values 
-	  are passed to the Birchfield-Tomasi pixel cost function.
-	  
-	  uniquenessRatio	Margin in percentage by which the best (minimum) computed cost function value should "win" 
-	  the second best value to consider the found match correct. Normally, a value within the 5-15 range is good enough.
-	  
-	  speckleWindowSize	Maximum size of smooth disparity regions to consider their noise speckles and invalidate. Set 
-	  it to 0 to disable speckle filtering. Otherwise, set it somewhere in the 50-200 range.
-	  
-	  speckleRange	Maximum disparity variation within each connected component. If you do speckle filtering, 
-	  set the parameter to a positive value, it will be implicitly multiplied by 16. Normally, 1 or 2 is good enough.
-	  
-	  mode	Set it to StereoSGBM::MODE_HH to run the full-scale two-pass dynamic programming algorithm. 
-	  It will consume O(W*H*numDisparities) bytes, which is large for 640x480 stereo and huge for HD-size 
-	  pictures. By default, it is set to false .
-
-	*/
-	
-	// cv::Ptr<cv::StereoSGBM> sgbm = cv::StereoSGBM::create(minDisparity,numberOfDisparities,blockSize);
-	int block_size = 5;
-	
-	sgbm->setPreFilterCap(63);
-	int sgbmWinSize = block_size > 0 ? block_size : 3;
-	int numberOfDisparities = 64;
-	sgbm->setBlockSize(sgbmWinSize);
-
-    int cn = left.channels();
-	cv::Size img_size = left.size();
-	numberOfDisparities = numberOfDisparities > 0 ? numberOfDisparities : ((img_size.width/8) + 15) & -16;
-
-    sgbm->setP1(8*cn*sgbmWinSize*sgbmWinSize);
-    sgbm->setP2(32*cn*sgbmWinSize*sgbmWinSize);
-    sgbm->setMinDisparity(0);
-    sgbm->setNumDisparities(numberOfDisparities);
-    sgbm->setUniquenessRatio(10);
-    sgbm->setSpeckleWindowSize(100);
-    sgbm->setSpeckleRange(32);
-    sgbm->setDisp12MaxDiff(1);
-	int alg = 2;
-    if(alg==0)
-        sgbm->setMode(cv::StereoSGBM::MODE_HH);
-    else if(alg==1)
-        sgbm->setMode(cv::StereoSGBM::MODE_SGBM);
-    else if(alg==2)
-        sgbm->setMode(cv::StereoSGBM::MODE_SGBM_3WAY);
-
-	cv::Mat disp1;
-	cv::Mat disp2;
-	sgbm -> compute(left,right,disp1);
-	disp1.convertTo(disp2,CV_8U,255/(numberOfDisparities*16.));
-
-	disp1.convertTo(disp, CV_32FC1,255/(numberOfDisparities*256*16.));
-	if(false)
-	{
-		// cv::namedWindow("left", 1);
-		// cv::imshow("left", left);
-		// cv::namedWindow("right", 1);
-		// cv::imshow("right", right);
-		cv::namedWindow("disp1",0);
-		cv::imshow("disp1",disp2);
-		cv::namedWindow("disparity", 0);
-		cv::imshow("disparity", disp);
-		cv::waitKey(0);
-	}
-
-}
 void process (const char* file_1,const char* file_2) {
 	using namespace std;
 
@@ -382,92 +291,13 @@ int main(int argc, char *argv[]) {
 		right_imgs.push_back(cv::imread(right_fnames[i]));
 		if(right_imgs[i].empty()){std::cout << "No right image at index " << i;return -1;}
 	}
-	// std::vector<cv::Mat> disp_mat_vec;
-	// cv::Ptr<cv::StereoSGBM> sgbm = cv::StereoSGBM::create(0,16,3);
+
 	// elas_compute_disp(left_imgs[0],right_imgs[0],disp,img_folder);
-	// std::vector<Disp_map> disp_mat_vec;
 	std::cout << "line 389 " << left_imgs.size() << std::endl;
 	for(int i = 0; i < left_imgs.size(); i++)
 	{
 	    create_pcd_one_pair(left_imgs[i], right_imgs[i], t_vec[i],q_vec[i], left_K, right_K, left_D, right_D, left_w, left_h, i, img_folder);
 	}
-	// Disp_map d;
-	// std::cout << "line 389 \n";
-	// d.compute_disp(left_imgs[0],right_imgs[0]);
-	// disp_mat_vec.push_back(d.disp_img);
-
-	// for(int i=0; i < left_imgs.size(); i++)
-	// {
-	// 	cv::Mat disp_temp;
-	// 	ComputeDisparity(left_imgs[i], right_imgs[i], disp_temp,sgbm);
-	// 	disp_mat_vec.push_back(disp_temp);
-	// 	// cv::namedWindow("disparity", 0);
-	// 	// cv::imshow("disparity", disp_mat_vec[i]);
-	// 	// cv::waitKey(0);
-	// }
-
-	// std::cout << "line 400 \n";
-	// cv::namedWindow("disp",0);
-	// cv::imshow("disp",d.disp_img);
-	// cv::waitKey(0);
-	// cv::imshow("Disp",disp);
-	// cv::waitKey(0);
-
-	// int typ1 = left_imgs[0].type();
-	// std::string s1 = type2str(typ1);
-// etc.
-
-	// finally compute the output point cloud from one or more stereo pairs.
-	//
-	// This is just a silly example of creating a colorized XYZ RGB point cloud.
-	// open it with pcl_viewer. then press 'r' and '5' to see the rgb.
-
-	// disp2 = left_imgs[0];
-
-	// pcl::PointCloud<pcl::PointXYZRGB> pc;
-	// pcl::PointCloud<pcl::PointXYZI>pc;
-	
-	// cv::Mat three_d_img;
-	
-	// cv::reprojectImageTo3D(disp_mat_vec[0],three_d_img,Q,true);
-
-/****************
-	cv::Mat essential_mat;
-	cv::Mat fund_mat;
-	compute_essential_matrix(t_vec[0], q_vec[0], essential_mat);
-	compute_fund_mat(essential_mat, left_K, right_K, fund_mat);
-
-	
-	double fc = compute_fc(&left_K, &right_K, &left_D, &right_D, left_w, left_h);
-	std::cout << "line 422 " << fc << std::endl;
-	// cv::Mat_<float> Q;
-	cv::Mat Q;
-	double tx = t_vec[0][0];
-	compute_Q(left_K.at<float>(0,2), left_K.at<float>(1,2), right_K.at<float>(0,2), fc, tx, Q);
-	std::cout << "line 435 Q\n" << Q << std::endl;
-	Depth_map dm;
-	cv::Mat Z_mat;
-	std::string out_file_pcd = img_folder + "/out.pcd";
-	dm.generate_z_map(d,Q,Z_mat);
-	dm.generate_point_cloud(Z_mat, left_imgs[0]);
-	dm.write_point_cloud_to_file(out_file_pcd);
-	
-	// cv::reprojectImageTo3D(disp_mat_vec[0],three_d_img,Q,true);
-	// std::cout << "line 428 three_d\n " << three_d_img << std::endl;
-	// cv::namedWindow("3dI");
-	// cv::imshow("3dI",three_d_img);
-	// cv::waitKey(0);
-	
-	// store_point_cloud_from_mat(pc,disp_mat_vec[0]);
-	// store_point_cloud_from_mat(pc,left_imgs[0]);
-	// store_point_cloud_from_mat3d(pc, three_d_img,left_imgs[0]);
-	// store_point_cloud_from_disp_mat(pc,disp_mat_vec[0]);
-	// pcl::PCDWriter w;	
-	*****************/	
-	// std::cout << "saving a pointcloud to " << out_file_pcd << std::endl;
 	std::cout << "All done" << std::endl;
-	// w.writeBinaryCompressed(out_file_pcd.c_str(), pc);
-	//pcl::io::savePCDBinaryCompressed("out.pcd", pc);
-	// std::cout << s1;
 	return 0;
 }
