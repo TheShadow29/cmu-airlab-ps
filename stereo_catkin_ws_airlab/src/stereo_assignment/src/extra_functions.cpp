@@ -126,7 +126,6 @@ void compute_Q(float cx, float cy, float cx_r, float fc, float tx, cv::Mat& Q)
 }
 
 
-
 void create_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen::Vector3d& t_vec, const Eigen::Quaterniond& q_vec, const cv::Mat& left_K,const cv::Mat& right_K, const cv::Mat left_D, const cv::Mat right_D, float left_w, float left_h, int iter, std::string img_folder,Eigen::Affine3d pose)
 {
 	Disp_map d;
@@ -145,7 +144,21 @@ void create_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen:
 	double fc = compute_fc(&left_K, &right_K, &left_D,&right_D, left_w, left_h);
 	cv::Mat Q;
 	double tx = t_vec[0];
-	compute_Q(left_K.at<float>(0,2), left_K.at<float>(1,2), right_K.at<float>(0,2), fc, tx, Q);
+	float cx = left_K.at<float>(0,2);
+	float cy = left_K.at<float>(1,2);
+	float cx_r = right_K.at<float>(0,2);
+	double fovx_l, fovy_l, focal_length_l, aspect_ratio_l;
+	double fovx_r, fovy_r, focal_length_r, aspect_ratio_r;
+	cv::Point2d cxy_l;
+	cv::Point2d cxy_r;
+
+	// cv::calibrationmatrixvalues(left_K, left.size(), left_w, left_h,fovx_l, fovy_l, focal_length_l, cxy_l, aspect_ratio_l);
+
+	// cv::calibrationmatrixvalues(right_K, right.size(), left_w, left_h, fovx_r, fovy_r, focal_length_r, cxy_r, aspect_ratio_r);
+	
+	std::cout << "line 152 cx " << cx << " cy " << cy << " cx_r " << cx_r << std::endl;
+	// compute_Q(left_K.at<float>(0,2), left_K.at<float>(1,2), right_K.at<float>(0,2), fc, tx, Q);
+	compute_Q(cx, cy, cx_r, fc, tx, Q);
 
 	// std::cout << "line 187 Q"
 	
@@ -164,10 +177,10 @@ void create_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen:
 	dm.write_point_cloud_to_file(out_file_pcd_l);
 	// std::cout << "line 162 pose_old \n" << pose.matrix() << std::endl;
 	Eigen::Affine3f pose_new = pose.cast<float>();
-	// std::cout << "line 164 pose_new \n" << pose_new.matrix() << std::endl; 
+	// // std::cout << "line 164 pose_new \n" << pose_new.matrix() << std::endl; 
 	dm.transform_point_cloud(pose_new);
 	std::stringstream ss2;
-	ss2 << img_folder << "/pcd_files/pair0" << iter <<"_new_left.ply";
+	ss2 << img_folder << "/aligned_pcd_files/pair0" << iter <<"_new_left.pcd";
 	dm.write_point_cloud_to_file(ss2.str()); 
 	// dm.write_pc_to_ply(ss2.str());
 	// dm.generate_point_cloud(Z_mat, right);

@@ -131,7 +131,7 @@ public:
 		cv::Mat_<float> Qf = Q;
 		// std::cout << "line 97 \n" << Qf << std::endl; 
 		cv::Mat_<float> disp_f = d.disp_img; 
-		// std::cout << "line 99 disp_f\n" << disp_f << std::endl;
+		std::cout << "line 99 disp_f\n" << disp_f << std::endl;
 		// cv::Mat_<cv::Vec3f> out_pc(disp_f.rows, disp_f.cols);
 		cv::Mat_<float> Z(disp_f.rows, disp_f.cols);
 		cv::Mat_<float> temp_vec1(4,1);
@@ -146,16 +146,24 @@ public:
 				temp_vec1(2) = disp_f.at<float>(y,x);
 				temp_vec1(3) = 1;
 				temp_vec2 = Qf * temp_vec1;
-
+				
 				temp_vec2 = temp_vec2/temp_vec2(3);
-				vector_t2.push_back(temp_vec2);				
-		    	Z.at<float>(y,x) = temp_vec2(2);
+				vector_t2.push_back(temp_vec2);
+				Z.at<float>(y,x) = temp_vec2(2);
+				// if(disp_f.at<float>(y,x) != 0.0)
+				// {
+				// 	Z.at<float>(y,x) = temp_vec2(2);
+				// }
+				// else
+				// {
+				// 	Z.at<float>(y,x) = FLT_MAX;
+				// }
 			}
 		}
 		Z.convertTo(Z_mat, CV_32FC1);
 
 		// std::cout << "line 116 v2 \n" << vector_t2[0] << std::endl; 
-		// std::cout << "line 117 Z_mat\n" << Z_mat << "line 114 end \n";
+		std::cout << "line 117 Z_mat\n" << Z_mat << "line 114 end \n";
 	}
 	void generate_point_cloud(cv::Mat Z_mat, cv::Mat left_img)
 	{
@@ -166,15 +174,18 @@ public:
 		{
 			for (int x = 0; x < left_img.cols; x++)
 			{
-				pcl::PointXYZRGB p;
-				p.x = x;
-				p.y = -y;
-				p.z = -Z_mat.at<float>(y,x);
-				cv::Vec3b bgr(left_img.at<cv::Vec3b>(y, x));
-				p.b = bgr[0];
-				p.g = bgr[1];
-				p.r = bgr[2];
-				pc.push_back(p);
+				if (Z_mat.at<float>(y,x) != FLT_MAX)
+				{
+					pcl::PointXYZRGB p;
+					p.x = x;
+					p.y = -y;
+					p.z = -Z_mat.at<float>(y,x);
+					cv::Vec3b bgr(left_img.at<cv::Vec3b>(y, x));
+					p.b = bgr[0];
+					p.g = bgr[1];
+					p.r = bgr[2];
+					pc.push_back(p);
+				}
 			}
 		}
 		std::cout << "line 133 \n";
