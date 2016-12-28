@@ -120,6 +120,7 @@ void compute_Q(float cx, float cy, float cx_r, float fc, float tx, cv::Mat& Q)
 	};
 	cv::Mat Q1;
 	Q1 = cv::Mat(4,4,CV_32FC1,q);
+	Q1.at<float>(3,3) = -0.05;
 	Q1.convertTo(Q, CV_32FC1);
 	std::cout << "line 108 Q \n" << Q << std::endl;
 }
@@ -146,6 +147,8 @@ void create_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen:
 	double tx = t_vec[0];
 	compute_Q(left_K.at<float>(0,2), left_K.at<float>(1,2), right_K.at<float>(0,2), fc, tx, Q);
 
+	// std::cout << "line 187 Q"
+	
 	Depth_map dm;
 	cv::Mat Z_mat;
 	std::stringstream ss_l;
@@ -159,9 +162,9 @@ void create_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen:
 
 	dm.generate_point_cloud(Z_mat, left);
 	dm.write_point_cloud_to_file(out_file_pcd_l);
-	std::cout << "line 162 pose_old \n" << pose.matrix() << std::endl;
+	// std::cout << "line 162 pose_old \n" << pose.matrix() << std::endl;
 	Eigen::Affine3f pose_new = pose.cast<float>();
-	std::cout << "line 164 pose_new \n" << pose_new.matrix() << std::endl; 
+	// std::cout << "line 164 pose_new \n" << pose_new.matrix() << std::endl; 
 	dm.transform_point_cloud(pose_new);
 	std::stringstream ss2;
 	ss2 << img_folder << "/pcd_files/pair0" << iter <<"_new_left.ply";
@@ -183,7 +186,7 @@ void create_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen:
 void create2_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen::Vector3d& t_vec, const Eigen::Quaterniond& q_vec, const cv::Mat& left_K,const cv::Mat& right_K, const cv::Mat left_D, const cv::Mat right_D, float left_w, float left_h, int iter, std::string img_folder,Eigen::Affine3d pose)
 {
 	cv::Mat R1, R2;
-	cv::Mat Q = cv::Mat::zeros(4,4,CV_32FC1);
+	cv::Mat Q = cv::Mat::zeros(4,4,CV_64F);
 	cv::Mat left_P, right_P;
 	Eigen::Matrix3d rot_mat_eigd = q_vec.matrix();
 	// Eigen::Matrix3f rot_mat_eigf = rot_mat_eigd.cast<float>();
@@ -197,6 +200,7 @@ void create2_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen
 	T.at<double>(2) = t_vec(2);
 	std::cout << "line 196 \n";
 	cv::stereoRectify(left_K, left_D, right_K, right_D, left.size(), rot_mat_cv, T, R1, R2, left_P, right_P, Q);
+	Q.at<double>(3,3) = -0.005;
 	// std::cout << "line 198 \n";
 	std::cout << "line 198 Q_2 \n" << Q << std::endl;
 
