@@ -183,8 +183,11 @@ public:
 	void reproject_to_3d_opencv(const Disp_map& d,cv::Mat Q,const cv::Mat& left)
 	{
 		cv::Mat three_d_img;
-
-		cv::reprojectImageTo3D(d.disp_img, three_d_img,Q);
+		cv::Mat_<float> disp_f = d.disp_img;
+		// std::cout << "line 187 \n" << Q << std::endl;
+		cv::Mat_<float> Qf = Q;
+		// std::cout << "line 189 \n" << Qf << std::endl;
+		cv::reprojectImageTo3D(disp_f, three_d_img,Qf);
 
 		for(int y = 0; y < three_d_img.rows; y++)
 		{
@@ -218,6 +221,12 @@ public:
 		pcl::PCDWriter w;
 		w.writeBinaryCompressed(file_name.c_str(), pc2);
 		std::cout << "line 215 \n";
+	}
+	void write_pc_to_ply(std::string file_name)
+	{
+		pcl::PLYWriter w;
+		w.write(file_name,pc);
+		std::cout << "line 216 \n";
 	}
 
 	void transform_point_cloud(const Eigen::Affine3f& aff)

@@ -3,7 +3,7 @@
 
 #include <pcl/point_cloud.h>
 #include <pcl/io/pcd_io.h>
-
+#include <pcl/io/ply_io.h>
 #include "opencv2/calib3d/calib3d.hpp"
 #include "opencv2/imgproc.hpp"
 #include "opencv2/imgcodecs.hpp"
@@ -124,6 +124,8 @@ void compute_Q(float cx, float cy, float cx_r, float fc, float tx, cv::Mat& Q)
 	std::cout << "line 108 Q \n" << Q << std::endl;
 }
 
+
+
 void create_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen::Vector3d& t_vec, const Eigen::Quaterniond& q_vec, const cv::Mat& left_K,const cv::Mat& right_K, const cv::Mat left_D, const cv::Mat right_D, float left_w, float left_h, int iter, std::string img_folder,Eigen::Affine3d pose)
 {
 	Disp_map d;
@@ -156,12 +158,15 @@ void create_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen:
 	dm.generate_z_map(d,Q,Z_mat);
 
 	dm.generate_point_cloud(Z_mat, left);
+	dm.write_point_cloud_to_file(out_file_pcd_l);
+	std::cout << "line 162 pose_old \n" << pose.matrix() << std::endl;
 	Eigen::Affine3f pose_new = pose.cast<float>();
+	std::cout << "line 164 pose_new \n" << pose_new.matrix() << std::endl; 
 	dm.transform_point_cloud(pose_new);
 	std::stringstream ss2;
-	ss2 << img_folder << "/pcd_files/pair0" << iter <<"_new_left.pcd";
-	dm.write_point_cloud_to_file(ss2.str());
-
+	ss2 << img_folder << "/pcd_files/pair0" << iter <<"_new_left.ply";
+	dm.write_point_cloud_to_file(ss2.str()); 
+	// dm.write_pc_to_ply(ss2.str());
 	// dm.generate_point_cloud(Z_mat, right);
 	// dm.write_point_cloud_to_file(out_file_pcd_r);
 
@@ -175,3 +180,33 @@ void create_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen:
 }
 
 
+void create2_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen::Vector3d& t_vec, const Eigen::Quaterniond& q_vec, const cv::Mat& left_K,const cv::Mat& right_K, const cv::Mat left_D, const cv::Mat right_D, float left_w, float left_h, int iter, std::string img_folder,Eigen::Affine3d pose)
+{
+	cv::Mat R1, R2;
+	cv::Mat Q = cv::Mat::zeros(4,4,CV_32FC1);
+	cv::Mat left_P, right_P;
+	Eigen::Matrix3d rot_mat_eigd = q_vec.matrix();
+	// Eigen::Matrix3f rot_mat_eigf = rot_mat_eigd.cast<float>();
+	cv::Mat rot_mat_cv = cv::Mat::eye(3,3,CV_64F);
+	cv::eigen2cv(rot_mat_eigd, rot_mat_cv);
+
+	cv::Mat T = cv::Mat::zeros(3,1,CV_64F);
+	// std::cout << "line 192 \n";
+	T.at<double>(0) = t_vec(0);
+	T.at<double>(1) = t_vec(1);
+	T.at<double>(2) = t_vec(2);
+	std::cout << "line 196 \n";
+	cv::stereoRectify(left_K, left_D, right_K, right_D, left.size(), rot_mat_cv, T, R1, R2, left_P, right_P, Q);
+	// std::cout << "line 198 \n";
+	std::cout << "line 198 Q_2 \n" << Q << std::endl;
+
+	Disp_map d;
+	d.compute_disp(left,right);
+
+	Depth_map dm;
+	dm.reproject_to_3d_opencv(d, Q, left);
+	std::stringstream ssj3;
+	ssj3 << img_folder << "/pcd_direct/pair0" << iter << ".pcd";
+	dm.write_point_cloud2_to_file(ssj3.str());
+	
+}

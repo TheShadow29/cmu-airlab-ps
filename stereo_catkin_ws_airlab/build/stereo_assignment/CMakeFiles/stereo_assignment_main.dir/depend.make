@@ -339,6 +339,11 @@ stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/stereo_code.cpp.o: /
 stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/stereo_code.cpp.o: /usr/local/include/pcl-1.8/pcl/io/impl/pcd_io.hpp
 stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/stereo_code.cpp.o: /usr/local/include/pcl-1.8/pcl/io/lzf.h
 stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/stereo_code.cpp.o: /usr/local/include/pcl-1.8/pcl/io/pcd_io.h
+stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/stereo_code.cpp.o: /usr/local/include/pcl-1.8/pcl/io/ply/byte_order.h
+stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/stereo_code.cpp.o: /usr/local/include/pcl-1.8/pcl/io/ply/io_operators.h
+stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/stereo_code.cpp.o: /usr/local/include/pcl-1.8/pcl/io/ply/ply.h
+stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/stereo_code.cpp.o: /usr/local/include/pcl-1.8/pcl/io/ply/ply_parser.h
+stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/stereo_code.cpp.o: /usr/local/include/pcl-1.8/pcl/io/ply_io.h
 stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/stereo_code.cpp.o: /usr/local/include/pcl-1.8/pcl/pcl_base.h
 stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/stereo_code.cpp.o: /usr/local/include/pcl-1.8/pcl/pcl_config.h
 stereo_assignment/CMakeFiles/stereo_assignment_main.dir/src/stereo_code.cpp.o: /usr/local/include/pcl-1.8/pcl/pcl_exports.h

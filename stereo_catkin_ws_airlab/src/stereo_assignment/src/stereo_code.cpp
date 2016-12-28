@@ -295,7 +295,7 @@ int main(int argc, char *argv[]) {
 	std::cout << "line 389 " << left_imgs.size() << std::endl;
 	for(int i = 0; i < left_imgs.size(); i++)
 	{
-	    create_pcd_one_pair(left_imgs[i], right_imgs[i], t_vec[i],q_vec[i], left_K, right_K, left_D, right_D, left_w, left_h, i, img_folder,poses[i]);
+	    create2_pcd_one_pair(left_imgs[i], right_imgs[i], t_vec[i],q_vec[i], left_K, right_K, left_D, right_D, left_w, left_h, i, img_folder,poses[i]);
 	}
 	std::cout << "All done" << std::endl;
 	return 0;
