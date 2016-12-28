@@ -131,7 +131,7 @@ public:
 		cv::Mat_<float> Qf = Q;
 		// std::cout << "line 97 \n" << Qf << std::endl; 
 		cv::Mat_<float> disp_f = d.disp_img; 
-		std::cout << "line 99 disp_f\n" << disp_f << std::endl;
+		// std::cout << "line 99 disp_f\n" << disp_f << std::endl;
 		// cv::Mat_<cv::Vec3f> out_pc(disp_f.rows, disp_f.cols);
 		cv::Mat_<float> Z(disp_f.rows, disp_f.cols);
 		cv::Mat_<float> temp_vec1(4,1);
@@ -163,7 +163,7 @@ public:
 		Z.convertTo(Z_mat, CV_32FC1);
 
 		// std::cout << "line 116 v2 \n" << vector_t2[0] << std::endl; 
-		std::cout << "line 117 Z_mat\n" << Z_mat << "line 114 end \n";
+		// std::cout << "line 117 Z_mat\n" << Z_mat << "line 114 end \n";
 	}
 	void generate_point_cloud(cv::Mat Z_mat, cv::Mat left_img)
 	{
@@ -178,8 +178,8 @@ public:
 				{
 					pcl::PointXYZRGB p;
 					p.x = x;
-					p.y = -y;
-					p.z = -Z_mat.at<float>(y,x);
+					p.y = y;
+					p.z = Z_mat.at<float>(y,x);
 					cv::Vec3b bgr(left_img.at<cv::Vec3b>(y, x));
 					p.b = bgr[0];
 					p.g = bgr[1];
@@ -243,6 +243,11 @@ public:
 	void transform_point_cloud(const Eigen::Affine3f& aff)
 	{
 		pcl::transformPointCloud(pc,pc,aff);
+	}
+
+	void transform_point_cloud2(const Eigen::Affine3f &aff)
+	{
+		pcl::transformPointCloud(pc2,pc2,aff);
 	}
 
 };

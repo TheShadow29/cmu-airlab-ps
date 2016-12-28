@@ -212,9 +212,20 @@ void create2_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen
 	T.at<double>(1) = t_vec(1);
 	T.at<double>(2) = t_vec(2);
 	std::cout << "line 196 \n";
-	cv::stereoRectify(left_K, left_D, right_K, right_D, left.size(), rot_mat_cv, T, R1, R2, left_P, right_P, Q);
-	Q.at<double>(3,3) = -0.005;
+
+	double tx = t_vec[0];
+	float cx = left_K.at<float>(0,2);
+	float cy = left_K.at<float>(1,2);
+	float cx_r = right_K.at<float>(0,2);
+	double fc = compute_fc(&left_K, &right_K, &left_D,&right_D, left_w, left_h);
+
+	compute_Q(cx, cy, cx_r, fc, tx, Q);
+	std::cout << "line 223 cx " << cx << " cy " << cy << " cx_r " << cx_r << " tx " << tx <<  " fc " << fc << std::endl;
+
+	// cv::stereoRectify(left_K, left_D, right_K, right_D, left.size(), rot_mat_cv, T, R1, R2, left_P, right_P, Q);
+	// Q.at<double>(3,3) = -0.005;
 	// std::cout << "line 198 \n";
+	Q.at<float>(3,3) = -0.009;
 	std::cout << "line 198 Q_2 \n" << Q << std::endl;
 
 	Disp_map d;
@@ -225,5 +236,12 @@ void create2_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen
 	std::stringstream ssj3;
 	ssj3 << img_folder << "/pcd_direct/pair0" << iter << ".pcd";
 	dm.write_point_cloud2_to_file(ssj3.str());
+
+	Eigen::Affine3f pose_new = pose.cast<float>();
+	dm.transform_point_cloud2(pose_new);
+	std::stringstream ss2;
+	ss2 << img_folder << "/aligned_direct/pair0" << iter << "_new_left.pcd";
+	dm.write_point_cloud2_to_file(ss2.str());
+
 	
 }
