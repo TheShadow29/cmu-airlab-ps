@@ -41,6 +41,47 @@ std::string type2str(int type)
 	return r;
 }
 
+void equalize_illumination(const cv::Mat& inp_img, cv::Mat& equalized_img_out)
+{
+	cv::Mat clahe_img;
+	cv::cvtColor(inp_img,clahe_img, CV_BGR2Lab);
+	std::vector<cv::Mat> channels(3);
+	cv::split(clahe_img,channels);
+
+	cv::Ptr<cv::CLAHE> clahe_ptr = cv::createCLAHE();
+	clahe_ptr->setClipLimit(4);
+	cv::Mat dst;
+	clahe_ptr->apply(channels[0],dst);
+	dst.copyTo(channels[0]);
+	cv::merge(channels, clahe_img);
+
+	cv::cvtColor(clahe_img, equalized_img_out, CV_Lab2BGR);
+
+	// cv::namedWindow("Clahe");
+	// cv::imshow("Clahe", equalized_img_out);
+	// cv::waitKey(0);
+	
+}
+
+void apply_log(const cv::Mat& inp_img, cv::Mat& log_out)
+{
+	cv::Mat out_img_gauss_rgb;
+	cv::GaussianBlur(inp_img, out_img_gauss_rgb, cv::Size(3,3),0,0, cv::BORDER_DEFAULT);
+	cv::Mat out_img_gauss_gray;
+	cv::cvtColor(out_img_gauss_rgb,out_img_gauss_gray,cv::COLOR_RGB2GRAY);
+	cv::Mat out_img_lap;
+	int kernel_size = 3;
+	int scale = 1;
+	int delta = 0;
+	int ddepth = CV_16S;
+	cv::Laplacian(out_img_gauss_gray,out_img_lap, ddepth, kernel_size, scale, delta, cv::BORDER_DEFAULT);
+	cv::convertScaleAbs(out_img_lap, log_out);
+
+	// cv::namedWindow("Lap");
+	// cv::imshow("Lap", log_out);
+	// cv::waitKey(0);
+}
+
 class Disp_map
 {
 private:
@@ -54,6 +95,17 @@ public:
 	}
 	
 	Disp_map(cv::Mat _disp_img) : disp_img(_disp_img){}
+	
+	void preprocess_img(const cv::Mat& left,const cv::Mat& right, cv::Mat& left_pre, cv::Mat& right_pre)
+	{
+		// cv::Mat left_ill;
+		// cv::Mat right_ill;
+		equalize_illumination(left, left_pre);
+		equalize_illumination(right,right_pre);
+		// apply_log(left, left_pre);
+		// apply_log(right, right_pre);
+		
+	}
 	
 	void init_sgbm(const cv::Mat& left,int block_size = 5, int numberOfDisparities = 64)
 	{
@@ -111,6 +163,8 @@ public:
 		disp_img.convertTo(img_to_save,CV_8U,255);
 		cv::imwrite(file_name.c_str(),img_to_save);
 	}
+
+	
 };
 
 

@@ -126,7 +126,7 @@ void compute_Q(float cx, float cy, float cx_r, float fc, float tx, cv::Mat& Q)
 }
 
 
-void create_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen::Vector3d& t_vec, const Eigen::Quaterniond& q_vec, const cv::Mat& left_K,const cv::Mat& right_K, const cv::Mat left_D, const cv::Mat right_D, float left_w, float left_h, int iter, std::string img_folder,Eigen::Affine3d pose)
+void create_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen::Vector3d& t_vec, const Eigen::Quaterniond& q_vec, const cv::Mat& left_K,const cv::Mat& right_K, const cv::Mat left_D, const cv::Mat right_D, float left_w, float left_h, int iter, std::string img_folder,Eigen::Affine3d pose, Depth_map& final_map)
 {
 	Disp_map d;
 	d.compute_disp(left,right);
@@ -196,7 +196,7 @@ void create_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen:
 }
 
 
-void create2_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen::Vector3d& t_vec, const Eigen::Quaterniond& q_vec, const cv::Mat& left_K,const cv::Mat& right_K, const cv::Mat left_D, const cv::Mat right_D, float left_w, float left_h, int iter, std::string img_folder,Eigen::Affine3d pose)
+void create2_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen::Vector3d& t_vec, const Eigen::Quaterniond& q_vec, const cv::Mat& left_K,const cv::Mat& right_K, const cv::Mat left_D, const cv::Mat right_D, float left_w, float left_h, int iter, std::string img_folder,Eigen::Affine3d pose, Depth_map& final_map)
 {
 	cv::Mat R1, R2;
 	cv::Mat Q = cv::Mat::zeros(4,4,CV_64F);
@@ -225,12 +225,17 @@ void create2_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen
 	// cv::stereoRectify(left_K, left_D, right_K, right_D, left.size(), rot_mat_cv, T, R1, R2, left_P, right_P, Q);
 	// Q.at<double>(3,3) = -0.005;
 	// std::cout << "line 198 \n";
-	Q.at<float>(3,3) = -0.009;
+	Q.at<float>(3,3) = -0.01;
 	std::cout << "line 198 Q_2 \n" << Q << std::endl;
 
 	Disp_map d;
-	d.compute_disp(left,right);
-
+	cv::Mat left_pre;
+	cv::Mat right_pre;
+	d.preprocess_img(left,right,left_pre, right_pre);
+	d.compute_disp(left_pre,right_pre);
+	std::stringstream ss_d;
+	ss_d << img_folder << "/disp_direct/disp0" << iter << ".png";
+	d.save_disp_img(ss_d.str());
 	Depth_map dm;
 	dm.reproject_to_3d_opencv(d, Q, left);
 	std::stringstream ssj3;
@@ -243,5 +248,5 @@ void create2_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen
 	ss2 << img_folder << "/aligned_direct/pair0" << iter << "_new_left.pcd";
 	dm.write_point_cloud2_to_file(ss2.str());
 
-	
+	final_map.pc2 += dm.pc2;
 }

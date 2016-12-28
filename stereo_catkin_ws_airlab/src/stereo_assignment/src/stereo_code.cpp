@@ -293,10 +293,16 @@ int main(int argc, char *argv[]) {
 
 	// elas_compute_disp(left_imgs[0],right_imgs[0],disp,img_folder);
 	std::cout << "line 389 " << left_imgs.size() << std::endl;
+	cv::Mat lap;
+	// equalize_illumination(left_imgs[0],equl);
+	apply_log(left_imgs[0], lap);
+	Depth_map final_map;
 	for(int i = 0; i < left_imgs.size(); i++)
 	{
-	    create2_pcd_one_pair(left_imgs[i], right_imgs[i], t_vec[i],q_vec[i], left_K, right_K, left_D, right_D, left_w, left_h, i, img_folder,poses[i]);
+	    create2_pcd_one_pair(left_imgs[i], right_imgs[i], t_vec[i],q_vec[i], left_K, right_K, left_D, right_D, left_w, left_h, i, img_folder,poses[i], final_map);
 	}
+	std::string out_f = img_folder + "/aligned_direct/aligned.pcd";
+	final_map.write_point_cloud2_to_file(out_f);
 	std::cout << "All done" << std::endl;
 	return 0;
 }
