@@ -172,11 +172,11 @@ class Depth_map
 {
 private:
 public:
-	cv::Mat depth_img;
+	// cv::Mat depth_img;
 	pcl::PointCloud<pcl::PointXYZRGB> pc;
 	pcl::PointCloud<pcl::PointXYZRGB> pc2;
 	Depth_map(){};
-	Depth_map(cv::Mat _depth_img):depth_img(_depth_img){}
+	// Depth_map(cv::Mat _depth_img):depth_img(_depth_img){}
 	void generate_z_map(const Disp_map &d,const cv::Mat& Q, cv::Mat& Z_mat)
 	{
 		std::cout << "line 93\n";		

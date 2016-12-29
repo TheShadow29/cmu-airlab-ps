@@ -293,9 +293,11 @@ int main(int argc, char *argv[]) {
 
 	// elas_compute_disp(left_imgs[0],right_imgs[0],disp,img_folder);
 	std::cout << "line 389 " << left_imgs.size() << std::endl;
-	cv::Mat lap;
+	// cv::Mat equl;		   
 	// equalize_illumination(left_imgs[0],equl);
-	apply_log(left_imgs[0], lap);
+	// std::string out_f1 = img_folder + "/clahe.png";
+	// cv::imwrite(out_f1.c_str(),equl);
+	// apply_log(left_imgs[0], lap);
 	Depth_map final_map;
 	for(int i = 0; i < left_imgs.size(); i++)
 	{

@@ -8,6 +8,12 @@
 \usepackage{hyperref}
 \usepackage{gensymb}
 \usepackage{amsmath}
+\usepackage{float}
+
+% \usepackage{setspace}
+
+% \renewcommand{\floatpagefraction}{0.9}
+
 
 \newcommand\Problem[1]{
   \\
@@ -18,6 +24,20 @@
   \textbf{A#1.}
   \\
 }
+
+\newcommand\Probsub[2]
+{
+  \\
+  \textbf{Q#1.#2}
+}
+
+\newcommand\Solsub[2]
+{
+  \\
+  \textbf{A#1.#2}
+  \\
+}
+
 \newcommand\tab[1][0.5cm]{\hspace*{#1}}
 
 \title{CMU Airlab Problem Statement}
@@ -31,7 +51,7 @@
 \begin{document}
 \maketitle
 
-\section*{Problem Statement}
+\section*{Problem Statement for Q2}
 \Problem{1} Name one advantage and one disadvantage of using Euler angles (e.g. Roll-Pitch-Yaw), unit quaternions, rotation matrices and axis/angle representations of rotations.
 \Sol{1}
 \begin{itemize}
@@ -257,4 +277,43 @@ Now we can differentiate easily, using the fact
 $$\frac{d(a^Tx)}{dx} = a^T$$
 Hence we get
 $$\frac{\partial Rv}{\partial w}|_{\substack{\omega = 0}} = -[v]_x$$
+
+\section*{Problem Statement for Q4 : 3D Perception}
+\Problem{1} Plane Segmentation Tutorial
+\Sol{1} Plane Segmentation is done using SAC segmentation. First the model type is selected as a plane, and then computation method is selected as RANSAC. The code basically chooses points which satisfy the equation of a plane, using RANSAC method. Once it has found the plane with maximum number of inliers,it computes the equation of the plane in the form $$ax + by + cz + d = 0$$. It then colors those points, and then removes all those inliers, and repeats the method to get a new set of inliers. This way red, green and blue points are shown.
+
+The problem asked us to use display the normal vector arrows of the plane in the same colors as those belonging to the plane.
+
+I have done this using the Marker Arrow. I have computed the centroid of the points in a particular plane, and chosen this point to show the arrow. I also had the model coefficients for the plane in the form of $$ax + by + cz + d = 0$$ and hence I knew the direction of the normal is $$v = (a,b,c)$$ I simply used the Eigen library to get the quaternion form of this using the function FromTwoVectors, which gave me the orientation in the quaternion form, and I used these values to set the orirentation of the marker arrow, and also set the color same as that of the points.
+
+\begin{figure}[H]
+  % \textbf{Title}\\
+  \centering
+  \includegraphics[scale=0.5]{images/rviz_screenshot_2016_12_29-11_25_46}
+  \caption{Plane Segmentation Normal Vectors}
+  \label{Fig:1}
+\end{figure}
+
+\Problem{2} 3D reconstruction with Stereo
+\Sol{2} This was considerably tougher problem. The code was written following the guidelines provided in the problem statement. In brief the following steps were followed:
+\begin{itemize}
+\item Loading the data from data.json, left\_calib.json and right\_calib.json to the program. The default function recorded the filenames, and poses, which basically gives us Translation and Rotation in a matrix format. In addition to this, I also loaded the Translation and Rotation (in quaternion form) separately. 
+\item 
+\item For disparity map computation, a class \textbf{Disp\_map} is constructed, which stores the disparity map, a pointer for the Opencv implementation of Semi Global Block Matching (SGBM). The code for disparity computation is similar to that used in an example code in OpenCV cpp, for stereo matching. The disparity map is stored as a float. The class \textbf{Disp\_map} also has a funciton to store the disparity map in png format. Object oriented approach is used since it simplifies the code, and different algorithms can be implented.
+\item After the disparity map is computed, another class \textbf{Depth\_map} is constructed which stores two point clouds generated from different computations, one using my implementation of reprojection and the other using default opencv implementation of reprojection. Both give similar point cloud results, but opencv implementation gives slightly better results. The class also includes methods to compute the transfomration of a point cloud, and methods to save the point clouds in pcd or ply format.
+\item Once the point cloud is formed, it is saved in PCD format. The point cloud has several artifacts at places with ambiguous textures.
+\item Transformation into the same coordinate system is done using the pcl implementation of \textbf{tranformPointCloud}. Concatenation of point clouds is simply adding all the transformed point clouds, which is trivial. The resulting point cloud is also saved.
+\end{itemize}
+\Problem{3} Extra Credit
+\Sol{3}For extra credit the following has been implemented:
+\begin{itemize}
+\item Preprocessing the images using illumination equalization. This is done using CLAHE method in opencv. The disparity map turned out to be slightly better but the improvement is very nominal. Laplacian of Gaussian was also tried, but this result in a worse disparity map possibly because the disparity map also got blurred because of the gaussian.
+  \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.25]{images/clahe}
+    \caption{Illumination Equalized using Clahe}
+  \end{figure}
+
+  
+\end{itemize}
 \end{document}

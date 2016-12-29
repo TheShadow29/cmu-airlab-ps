@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.5.11)  24 DEC 2016 18:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.5.11)  29 DEC 2016 12:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -601,23 +601,31 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 631.
 LaTeX Info: Redefining \[ on input line 2735.
 LaTeX Info: Redefining \] on input line 2736.
 )
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count121
+\float@exts=\toks24
+\float@box=\box30
+\@float@everytoks=\toks25
+\@floatcapt=\box31
+)
 (./cmu_airlab_report.aux)
 \openout1 = `cmu_airlab_report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -655,17 +663,17 @@ LaTeX Font Info:    ... okay on input line 31.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count121
+\scratchcounter=\count122
 \scratchdimen=\dimen130
-\scratchbox=\box30
-\nofMPsegments=\count122
-\nofMParguments=\count123
-\everyMPshowfont=\toks24
-\MPscratchCnt=\count124
+\scratchbox=\box32
+\nofMPsegments=\count123
+\nofMParguments=\count124
+\everyMPshowfont=\toks26
+\MPscratchCnt=\count125
 \MPscratchDim=\dimen131
-\MPnumerator=\count125
-\makeMPintoPDFobject=\count126
-\everyMPtoPDFconversion=\toks25
+\MPnumerator=\count126
+\makeMPintoPDFobject=\count127
+\everyMPtoPDFconversion=\toks27
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
@@ -681,9 +689,9 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\c@lstlisting=\count127
-\AtBeginShipoutBox=\box31
-Package hyperref Info: Link coloring OFF on input line 31.
+\c@lstlisting=\count128
+\AtBeginShipoutBox=\box33
+Package hyperref Info: Link coloring OFF on input line 51.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -691,25 +699,25 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count128
+\c@section@level=\count129
 )
-LaTeX Info: Redefining \ref on input line 31.
-LaTeX Info: Redefining \pageref on input line 31.
-LaTeX Info: Redefining \nameref on input line 31.
+LaTeX Info: Redefining \ref on input line 51.
+LaTeX Info: Redefining \pageref on input line 51.
+LaTeX Info: Redefining \nameref on input line 51.
 
 (./cmu_airlab_report.out) (./cmu_airlab_report.out)
 \@outlinefile=\write3
 \openout3 = `cmu_airlab_report.out'.
 
-LaTeX Info: Redefining \celsius on input line 31.
-Package gensymb Info: Faking symbols for \degree and \celsius on input line 31.
+LaTeX Info: Redefining \celsius on input line 51.
+Package gensymb Info: Faking symbols for \degree and \celsius on input line 51.
 
 
 
 Package gensymb Warning: Not defining \perthousand.
 
-LaTeX Info: Redefining \ohm on input line 31.
-Package gensymb Info: Using \Omega for \ohm on input line 31.
+LaTeX Info: Redefining \ohm on input line 51.
+Package gensymb Info: Using \Omega for \ohm on input line 51.
 
 Package gensymb Warning: Not defining \micro.
 
@@ -720,22 +728,22 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.35 \Problem{1}
+l.55 \Problem{1}
                  Name one advantage and one disadvantage of using Euler angl...
 
 ? r
 OK, entering \nonstopmode...
 
-Underfull \hbox (badness 10000) in paragraph at lines 35--37
+Underfull \hbox (badness 10000) in paragraph at lines 55--57
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 38.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 58.
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 38.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 58.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
@@ -746,7 +754,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.105 \Problem{2}
+l.125 \Problem{2}
                   Let $R^a = (\theta_{roll}^a, \theta_{pitch}^a, \theta_{yaw...
 
 Your command was ignored.
@@ -754,37 +762,37 @@ Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 108--111
+Underfull \hbox (badness 10000) in paragraph at lines 128--131
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 118--120
+Underfull \hbox (badness 10000) in paragraph at lines 138--140
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 127--129
+Underfull \hbox (badness 10000) in paragraph at lines 147--149
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 136--138
+Underfull \hbox (badness 10000) in paragraph at lines 156--158
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 145--147
+Underfull \hbox (badness 10000) in paragraph at lines 165--167
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 150--155
+Underfull \hbox (badness 10000) in paragraph at lines 170--175
 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 160--162
+Underfull \hbox (badness 10000) in paragraph at lines 180--182
 
  []
 
@@ -795,7 +803,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.175 \Problem{4}
+l.195 \Problem{4}
                   Compute two compositions of the rotations using quaternion...
 
 Your command was ignored.
@@ -803,17 +811,17 @@ Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 175--180
+Underfull \hbox (badness 10000) in paragraph at lines 195--200
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 188--190
+Underfull \hbox (badness 10000) in paragraph at lines 208--210
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 209--211
+Underfull \hbox (badness 10000) in paragraph at lines 229--231
 
  []
 
@@ -824,7 +832,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.223 \Problem{5}
+l.243 \Problem{5}
                   How does axis/angle representation relate to quaternion? F...
 
 Your command was ignored.
@@ -839,7 +847,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.224 ...on q = (x, y, z, w) and angle/axis (n, θ
+l.244 ...on q = (x, y, z, w) and angle/axis (n, θ
                                                   )? Is the conversion
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -853,7 +861,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.248 \Problem{6}
+l.268 \Problem{6}
                   Assuming Euler angles are small, it is very useful to know...
 
 Your command was ignored.
@@ -863,7 +871,7 @@ or  <return>  to continue without it.
 ! Missing { inserted.
 <to be read again> 
                    \begingroup 
-l.249 $R \approx I + [\omega]_×
+l.269 $R \approx I + [\omega]_×
                                 $ , where $[.]_x$ is the skew-symmetric oper...
 A left brace was mandatory here, so I've put one in.
 You might want to delete and/or insert some corrections
@@ -878,7 +886,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.249 $R \approx I + [\omega]_×
+l.269 $R \approx I + [\omega]_×
                                 $ , where $[.]_x$ is the skew-symmetric oper...
 
 Your command was ignored.
@@ -888,7 +896,7 @@ or  <return>  to continue without it.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.249 $R \approx I + [\omega]_×$
+l.269 $R \approx I + [\omega]_×$
                                   , where $[.]_x$ is the skew-symmetric oper...
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -899,7 +907,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing { inserted.
 <to be read again> 
                    \begingroup 
-l.252 Given that $R \approx I + [\omega]_×
+l.272 Given that $R \approx I + [\omega]_×
                                            $ we deduce : $$Rv \approx v + [\...
 A left brace was mandatory here, so I've put one in.
 You might want to delete and/or insert some corrections
@@ -914,7 +922,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.252 Given that $R \approx I + [\omega]_×
+l.272 Given that $R \approx I + [\omega]_×
                                            $ we deduce : $$Rv \approx v + [\...
 
 Your command was ignored.
@@ -924,7 +932,7 @@ or  <return>  to continue without it.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.252 Given that $R \approx I + [\omega]_×$
+l.272 Given that $R \approx I + [\omega]_×$
                                              we deduce : $$Rv \approx v + [\...
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -932,24 +940,91 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 260.
-[4]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 260.
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.282 \Problem{1}
+                  Plane Segmentation Tutorial
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+<images/rviz_screenshot_2016_12_29-11_25_46.png, id=29, 469.755pt x 456.20438pt
+>
+File: images/rviz_screenshot_2016_12_29-11_25_46.png Graphic file (type png)
+ <use images/rviz_screenshot_2016_12_29-11_25_46.png>
+Package pdftex.def Info: images/rviz_screenshot_2016_12_29-11_25_46.png used on
+ input line 292.
+(pdftex.def)             Requested size: 234.87692pt x 228.10162pt.
+ [4]
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.297 \Problem{2}
+                  3D reconstruction with Stereo
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.307 \Problem{3}
+                  Extra Credit
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+<images/clahe.png, id=35, 642.4pt x 513.92pt>
+File: images/clahe.png Graphic file (type png)
+ <use images/clahe.png>
+Package pdftex.def Info: images/clahe.png used on input line 313.
+(pdftex.def)             Requested size: 160.59961pt x 128.47968pt.
+ [5pdfTeX warning (ext4): destination with the same identifier (name{figure.1})
+ has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.315   \end{figure}
+                     <./images/rviz_screenshot_2016_12_29-11_25_46.png (PNG cop
+y)>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 317.
+ [6pdfTeX warning (ext4): destination with the same identifier (name{figure.2})
+ has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.317 \end{document}
+                     <./images/clahe.png (PNG copy)>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 317.
  (./cmu_airlab_report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 260.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 260.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 317.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 317.
 Package rerunfilecheck Info: File `cmu_airlab_report.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 260.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 317.
  ) 
 Here is how much of TeX's memory you used:
- 7808 strings out of 493029
- 111407 string characters out of 6136234
- 214377 words of memory out of 5000000
- 11254 multiletter control sequences out of 15000+600000
+ 7885 strings out of 493029
+ 112547 string characters out of 6136234
+ 215808 words of memory out of 5000000
+ 11318 multiletter control sequences out of 15000+600000
  8716 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 29i,7n,32p,458b,466s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 29i,7n,32p,599b,466s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texl
@@ -961,10 +1036,10 @@ public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 sy7.pfb>
-Output written on cmu_airlab_report.pdf (4 pages, 130565 bytes).
+Output written on cmu_airlab_report.pdf (6 pages, 1081923 bytes).
 PDF statistics:
- 70 PDF objects out of 1000 (max. 8388607)
- 52 compressed objects within 1 object stream
- 6 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 85 PDF objects out of 1000 (max. 8388607)
+ 63 compressed objects within 1 object stream
+ 11 named destinations out of 1000 (max. 500000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
