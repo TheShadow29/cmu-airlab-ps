@@ -201,12 +201,18 @@ opencv2/core/utility.hpp
 /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/src/stereo_assignment/src/opencv2/core/utility.hpp
 opencv2/core/eigen.hpp
 -
+opencv2/stereo.hpp
+/home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/src/stereo_assignment/src/opencv2/stereo.hpp
+opencv2/photo.hpp
+/home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/src/stereo_assignment/src/opencv2/photo.hpp
 opencv2/imgproc/imgproc_c.h
 /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/src/stereo_assignment/src/opencv2/imgproc/imgproc_c.h
 opencv2/imgproc/detail/distortion_model.hpp
 /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/src/stereo_assignment/src/opencv2/imgproc/detail/distortion_model.hpp
 opencv2/calib3d/calib3d_c.h
 /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/src/stereo_assignment/src/opencv2/calib3d/calib3d_c.h
+opencv2/ximgproc/disparity_filter.hpp
+/home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/src/stereo_assignment/src/opencv2/ximgproc/disparity_filter.hpp
 
 /home/arktheshadow/ARK-Linux/Programming/ROS/CMU-PS/cmu-airlab-ps/stereo_catkin_ws_airlab/src/stereo_assignment/src/stereo_code.cpp
 Eigen/Core

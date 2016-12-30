@@ -224,6 +224,7 @@ void create2_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen
 
 	// cv::stereoRectify(left_K, left_D, right_K, right_D, left.size(), rot_mat_cv, T, R1, R2, left_P, right_P, Q);
 	// Q.at<double>(3,3) = -0.005;
+	
 	// std::cout << "line 198 \n";
 	Q.at<float>(3,3) = -0.01;
 	std::cout << "line 198 Q_2 \n" << Q << std::endl;
@@ -231,8 +232,15 @@ void create2_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen
 	Disp_map d;
 	cv::Mat left_pre;
 	cv::Mat right_pre;
+	cv::Mat left_census;
+	cv::Mat right_census;
 	d.preprocess_img(left,right,left_pre, right_pre);
+	// d.use_census_transform(left, left_census);
+	// d.use_census_transform(right, right_census);
+	// d.compute_disp(left_census,right_census);
 	d.compute_disp(left_pre,right_pre);
+	// d.post_process_disp_map(left_pre, right_pre);
+	// d.post_process_discard_noise();
 	std::stringstream ss_d;
 	ss_d << img_folder << "/disp_direct/disp0" << iter << ".png";
 	d.save_disp_img(ss_d.str());
@@ -246,7 +254,9 @@ void create2_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen
 	dm.transform_point_cloud2(pose_new);
 	std::stringstream ss2;
 	ss2 << img_folder << "/aligned_direct/pair0" << iter << "_new_left.pcd";
+	std::stringstream ssj4;
+	ssj4 << img_folder << "/aligned_direct/pair0" << iter << "_new_left.ply";
 	dm.write_point_cloud2_to_file(ss2.str());
-
+	dm.write_pc_to_ply(ssj4.str());
 	final_map.pc2 += dm.pc2;
 }

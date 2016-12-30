@@ -298,6 +298,11 @@ int main(int argc, char *argv[]) {
 	// std::string out_f1 = img_folder + "/clahe.png";
 	// cv::imwrite(out_f1.c_str(),equl);
 	// apply_log(left_imgs[0], lap);
+	Disp_map d1;
+	// d1.use_census_transform(left_imgs[0],right_imgs[0]);
+	// d1.post_process_disp_map(left_imgs[0], right_imgs[0]);
+	// d1.compute_disp(left_imgs[0],right_imgs[0]);
+	// d1.post_process_discard_noise();
 	Depth_map final_map;
 	for(int i = 0; i < left_imgs.size(); i++)
 	{
