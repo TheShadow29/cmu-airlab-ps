@@ -207,9 +207,7 @@ public:
 
 	void use_census_transform(const cv::Mat& left,const cv::Mat& right)
 	{
-		int h = left.rows;
-		int w = left.cols;
-		cv::Mat temp(left.size(), CV_32FC1);
+    	cv::Mat temp(left.size(), CV_32FC1);
 		unsigned int census = 0;
 		unsigned int bit = 0;
 		int m=3;
@@ -217,9 +215,9 @@ public:
 		int i,j,x,y;
 		int shiftCount = 0;
    
-		for (x = m/2; x < h - m/2; x++)
+		for (x = m/2; x < left.rows - m/2; x++)
 		{
-			for(y = n/2; y < w - n/2; y++)
+			for(y = n/2; y < left.cols - n/2; y++)
 			{
 				census = 0;
 				shiftCount = 0;
@@ -242,12 +240,40 @@ public:
 						shiftCount ++;
 					}	
 				}
-          
 				temp.ptr<float>(x)[y] = census;
 			}
 		}
 		temp.copyTo(disp_img);
     }
+
+	void interpolate_disp_map()
+	{
+		// this->init_disp_mask()
+		cv::namedWindow("disp_img1");
+		cv::imshow("disp_img1",disp_img);
+
+		std::cout << "line 254\n";
+		cv::Mat temp(disp_img.size(),CV_8UC1);
+
+		double min_l, max_l;
+		cv::Point min_loc, max_loc;
+		cv::minMaxLoc(disp_img, &min_l, &max_l, &min_loc, &max_loc);
+		this->init_disp_mask(min_l);
+		// cv::bilateralFilter(disp_img, temp, 5,30,30,cv::BORDER_REPLICATE);
+		cv::Mat_<float> disp_f = disp_img;
+		disp_f -= min_l;
+		std::cout << "line 264\n";
+		cv::Mat disp_temp;
+		disp_f.convertTo(disp_temp, CV_8UC1, 255);
+		std::cout << "line 266\n";
+		cv::inpaint(disp_temp,disp_mask,temp,10,cv::INPAINT_TELEA);
+		std::cout << "line 267\n";
+		temp.convertTo(disp_img,CV_32FC1,1.0/255);
+		cv::namedWindow("disp_img2");
+		cv::imshow("disp_img2",disp_img);
+		cv::waitKey(0);
+		
+	}
 
 	void post_process_disp_map(const cv::Mat& left, const cv::Mat& right)
 	{
@@ -287,17 +313,17 @@ public:
 		wls_filter->filter(ld.disp_img,left,filtered_disp,rd.disp_img);
 		filtered_disp.convertTo(disp_img,CV_32FC1,1.0/(256*128));
 		std::cout << "line 255 \n";
-		int vis_mult = 1;
-		cv::Mat raw_disp_vis;
+		// int vis_mult = 1;
+		// cv::Mat raw_disp_vis;
 
-		cv::ximgproc::getDisparityVis(ld.disp_img,raw_disp_vis,vis_mult);
-		cv::namedWindow("raw disparity");
-		cv::imshow("raw disparity", raw_disp_vis);
-		cv::Mat filtered_disp_vis;
-		cv::ximgproc::getDisparityVis(filtered_disp,filtered_disp_vis,vis_mult);
-		cv::namedWindow("filtered disparity");
-		cv::imshow("filtered disparity", filtered_disp_vis);
-		cv::waitKey(0);
+		// cv::ximgproc::getDisparityVis(ld.disp_img,raw_disp_vis,vis_mult);
+		// cv::namedWindow("raw disparity");
+		// cv::imshow("raw disparity", raw_disp_vis);
+		// cv::Mat filtered_disp_vis;
+		// cv::ximgproc::getDisparityVis(filtered_disp,filtered_disp_vis,vis_mult);
+		// cv::namedWindow("filtered disparity");
+		// cv::imshow("filtered disparity", filtered_disp_vis);
+		// cv::waitKey(0);
 
 	}
 

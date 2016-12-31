@@ -240,7 +240,9 @@ void create2_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen
 	// d.compute_disp(left_census,right_census);
 	d.compute_disp(left_pre,right_pre);
 	// d.post_process_disp_map(left_pre, right_pre);
+	// d.interpolate_disp_map();
 	d.post_process_discard_noise(left_pre);
+	
 	std::stringstream ss_d;
 	ss_d << img_folder << "/disp_direct/disp0" << iter << ".png";
 	d.save_disp_img(ss_d.str());
