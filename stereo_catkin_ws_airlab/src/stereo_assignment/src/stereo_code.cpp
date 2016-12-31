@@ -304,12 +304,24 @@ int main(int argc, char *argv[]) {
 	// d1.compute_disp(left_imgs[0],right_imgs[0]);
 	// d1.post_process_discard_noise();
 	Depth_map final_map;
+	Depth_map conc;
+	// Depth_map aligned_map;
+	// std::vector<pcl::PointCloud<pcl::PointXYZRGB>Ptr > pc_all;
 	for(int i = 0; i < left_imgs.size(); i++)
+	// for(int i = 0; i < 2; i++)
 	{
 	    create2_pcd_one_pair(left_imgs[i], right_imgs[i], t_vec[i],q_vec[i], left_K, right_K, left_D, right_D, left_w, left_h, i, img_folder,poses[i], final_map);
 	}
-	std::string out_f = img_folder + "/aligned_direct/aligned.pcd";
+	std::string out_f = img_folder + "/aligned_direct/aligned2.pcd";
 	final_map.write_point_cloud2_to_file(out_f);
+	std::string out_d = img_folder + "/align_direct/align1.pcd";
+	// // aligned_map.align_point_clouds(pc_all);
+	// aligned_map.align_point_clouds(img_folder);
+	// std::string out_f2 = img_folder + "/aligned_direct/aligned1.pcd";
+	std::string out_f3 = img_folder + "/aligned_direct/aligned2.ply";	
+	// aligned_map.write_point_cloud2_to_file(out_f2);
+	// conc.write_point_cloud2_to_file(out_d);
+	final_map.write_pc_to_ply(out_f3);
 	std::cout << "All done" << std::endl;
 	return 0;
 }

@@ -240,7 +240,7 @@ void create2_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen
 	// d.compute_disp(left_census,right_census);
 	d.compute_disp(left_pre,right_pre);
 	// d.post_process_disp_map(left_pre, right_pre);
-	// d.post_process_discard_noise();
+	d.post_process_discard_noise(left_pre);
 	std::stringstream ss_d;
 	ss_d << img_folder << "/disp_direct/disp0" << iter << ".png";
 	d.save_disp_img(ss_d.str());
@@ -249,8 +249,12 @@ void create2_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen
 	std::stringstream ssj3;
 	ssj3 << img_folder << "/pcd_direct/pair0" << iter << ".pcd";
 	dm.write_point_cloud2_to_file(ssj3.str());
-
-	Eigen::Affine3f pose_new = pose.cast<float>();
+	// t_vec(2) = t_vec(2) - 1000*iter;
+	// Eigen::Vector3d t_new = t_vec;
+	// t_new(2) += 500000* iter;
+	Eigen::Affine3d pose_t = Eigen::Translation3d(t_vec) * q_vec;
+	Eigen::Affine3f pose_new = pose_t.cast<float>();
+	// Eigen::Affine3f pose_new = Eigen::Translation3f(t_vec) * q_vec;
 	dm.transform_point_cloud2(pose_new);
 	std::stringstream ss2;
 	ss2 << img_folder << "/aligned_direct/pair0" << iter << "_new_left.pcd";
@@ -259,4 +263,16 @@ void create2_pcd_one_pair(const cv::Mat &left, const cv::Mat &right, const Eigen
 	dm.write_point_cloud2_to_file(ss2.str());
 	dm.write_pc_to_ply(ssj4.str());
 	final_map.pc2 += dm.pc2;
+
+	// if(iter == 0)
+	// {
+	// 	final_map.pc2 = dm.pc2;
+	// }
+	// else
+	// {
+	// 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud_in(new pcl::PointCloud<pcl::PointXYZRGB> (dm.pc2));
+	// 	final_map.align_pc_icp(cloud_in);
+	// }
+	
+	// pc_all.push_back(dm.pc2);
 }

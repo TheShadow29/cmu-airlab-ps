@@ -4,6 +4,17 @@
 #include <pcl/point_cloud.h>
 #include <pcl/io/pcd_io.h>
 #include <pcl/registration/transforms.h>
+#include <pcl/registration/icp.h>
+#include <pcl/point_types.h>
+
+#include <pcl/impl/pcl_base.hpp>
+#include <pcl/kdtree/impl/kdtree_flann.hpp>
+#include <pcl/search/impl/kdtree.hpp>
+#include <pcl/search/impl/organized.hpp>
+#include <pcl/features/impl/normal_3d.hpp>
+// #include <pcl/visualization/cloud_viewer.h>
+
+
 
 #include "opencv2/calib3d/calib3d.hpp"
 #include "opencv2/imgproc.hpp"
@@ -138,6 +149,8 @@ public:
 		// apply_log(right, right_pre);
 		// std::cout << "line 114" <<type2str(left_pre.type()) << std::endl;
 	}
+
+	// void preprocess_remove_sky_regions(const cv::Mat& left)
 	
 	void init_sgbm(const cv::Mat& left,int block_size = 5, int numberOfDisparities = 64)
 	{
@@ -288,27 +301,33 @@ public:
 
 	}
 
-	void post_process_discard_noise()
+	void post_process_discard_noise(cv::Mat& left)
 	{
-		
-		cv::Mat_<float> disp_f = disp_img;
+		/*
+		  Thus, we define a pixel p is a sky pixel if p is in the upper half of IL, and its blue channel value B(p) is larger than a threshold Tsky:
+		 */
+		std::vector<cv::Mat> planes(3);
+		cv::split(left,planes);
+		cv::Mat temp = cv::Mat(cv::max(planes[2], cv::max(planes[1], planes[0])));
 		double min_l, max_l;
 		cv::Point min_loc, max_loc;
-		cv::minMaxLoc(disp_f, &min_l, &max_l, &min_loc, &max_loc);
-		std::cout << "line 295 " << "min_l " << min_l << " max_l " << max_l << std::endl; 
-		this->init_disp_mask(min_l);
-		cv::Mat disp_8U;
-		disp_f.convertTo(disp_8U,CV_8U,255);
-		cv::Mat disp_out_8U;
-		// cv::inpaint(disp_8U,disp_mask, disp_out_8U, 20,cv::INPAINT_TELEA);
-		disp_f -= min_l;
-		disp_f.convertTo(disp_img, CV_32FC1,255);
-		// cv::namedWindow("mask");
-		// cv::imshow("mask",disp_mask);
-		// cv::namedWindow("8U");
-		// cv::imshow("8U", disp_out_8U);
-		// disp_out_8U.convertTo(disp_img,CV_32FC1,1.0/255);
-		// cv::waitKey(0);
+		cv::minMaxLoc(temp, &min_l, &max_l, &min_loc, &max_loc);
+		
+		float tsky, gmax;
+		gmax = max_l;
+		tsky = 0.8 * gmax;
+		for(int y = 0; y < left.rows/2; y++)
+		{
+			for(int x = 0; x < left.cols; x++)
+			{
+				cv::Vec3b bgr(left.at<cv::Vec3b>(y, x));
+				if (bgr[0] > tsky)
+				{
+					disp_img.at<float>(y,x) = 0;
+				}
+
+			}
+		}
 	}
 	
 	void save_disp_img(std::string file_name)
@@ -418,14 +437,16 @@ public:
 		cv::Point min_loc, max_loc;
 		cv::minMaxLoc(disp_f, &min_l, &max_l, &min_loc, &max_loc);
 		disp_f -= min_l;
-		disp_f.convertTo(disp_f, CV_32FC1, 255);
+
+		int mult_fac = 25;
+		disp_f.convertTo(disp_f, CV_32FC1, mult_fac);
 
 		cv::reprojectImageTo3D(disp_f, three_d_img,Qf);
 		std::vector<cv::Mat> points_xyz;
 		cv::split(three_d_img,points_xyz);
  
 		
-		std::cout << "line 425 points_xyz[2] \n " << points_xyz[2] << std::endl;
+		// std::cout << "line 425 points_xyz[2] \n " << points_xyz[2] << std::endl;
 		// int counter = 0;
 		std::vector<cv::Point> idxy;
 		cv::Point tp;
@@ -451,6 +472,7 @@ public:
 					// p.g = bgr[1];
 					// p.r = bgr[2];
 					if(point[2] > 0)
+					// if(1)
 					{
 						tp.x = x;
 						tp.y = y;
@@ -461,7 +483,7 @@ public:
 			}
 		}
 		std::cout << "line 463 \n";
-		disp_f.convertTo(disp_f, CV_32FC1,1.0/255);
+		disp_f.convertTo(disp_f, CV_32FC1,1.0/mult_fac);
 		
 		cv::reprojectImageTo3D(disp_f, three_d_img,Qf);
 
@@ -480,6 +502,19 @@ public:
 
 			pc2.push_back(p);
 		}
+	}
+
+
+	void align_pc_icp(pcl::PointCloud<pcl::PointXYZRGB>::Ptr& cloud_in)
+	{
+		pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud_target(new pcl::PointCloud<pcl::PointXYZRGB>(pc2));
+		pcl::IterativeClosestPoint<pcl::PointXYZRGB, pcl::PointXYZRGB> icp;
+		pcl::PointCloud<pcl::PointXYZRGB> pc_temp;
+	    icp.setInputSource(cloud_in);
+		icp.setInputTarget(cloud_target);
+		icp.align(pc_temp);
+		std::cout << "Line 547 has converged:" << icp.hasConverged() << " score: " << icp.getFitnessScore() << std::endl;
+		std::cout << icp.getFinalTransformation() << std::endl;
 	}
 
 	void write_point_cloud_to_file(std::string file_name)

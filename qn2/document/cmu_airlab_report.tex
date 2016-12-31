@@ -307,13 +307,27 @@ I have done this using the Marker Arrow. I have computed the centroid of the poi
 \Problem{3} Extra Credit
 \Sol{3}For extra credit the following has been implemented:
 \begin{itemize}
-\item Preprocessing the images using illumination equalization. This is done using CLAHE method in opencv. The disparity map turned out to be slightly better but the improvement is very nominal. Laplacian of Gaussian was also tried, but this result in a worse disparity map possibly because the disparity map also got blurred because of the gaussian.
+\item \textbf{Preprocessing the images using illumination equalization}.\\ This is done using CLAHE method in opencv. The disparity map turned out to be slightly better but the improvement is very nominal. Laplacian of Gaussian was also tried, but this result in a worse disparity map possibly because the disparity map also got blurred because of the gaussian.
   \begin{figure}[H]
     \centering
     \includegraphics[scale=0.25]{images/clahe}
     \caption{Illumination Equalized using Clahe}
   \end{figure}
-
-  
+\item \textbf{Removal of Background Noise in Depth Map}. There were some pixels with very small value of disparity. These constituted parts of the image where disparity map gave absurd results. To remove these, the initial disparity map is multiplied by a factor(25 in the code). This new disparity map is then passed for reprojection. Now we consider only points with $z>0$. Other points have bad disparity and hence discarded.
+  \begin{figure}[H]
+    \centering
+    %Add figure
+    \caption{Background noise removed}
+  \end{figure}
+\item \textbf{Post processing. Removal of noise in disparity map due to sky regions.} This is done using a rather simple algorithm. We consider an element to be a sky element if it is present in the upper half of the image, and its blue channel color is greater than a certain threshold. The threshold is chosen to be $0.8 * gmax$ where $gmax = max(max(R),max(B),max(G))$. For such pixels the disparity is made 0. This gave suprisingly very good results. 
+  \begin{figure}[H]
+    \centering
+    % ADD FIGURE
+    \caption{Sky Noise Removed}
+  \end{figure}
+\item \textbf{Attempt at census transform}. OpenCV implementation of disparity Computation using census transform resulted in error due to some Computation problem in hamming distance, and was not resolved.
+\item \textbf{Attempt at post processing using WLS Filtering}. The OpenCV implementation of WLS filter in ximgproc only accepts CV\_16S. This leads to loss of info in the disparity map at the cost of better filtering. Overall the disparity map was worse. The primary reason for this is conversion to CV\_16S resulted in loss of information.
+\item \textbf{Interpolation using Inpainting}. A mask for image was created denoting good and bad pixels in the disparity map. But even then the disparity map was only slightly better. Since it was time consuming, the code has been commented.
+\item \textbf{Attempt at Alignment using Iterated Closest Point (ICP)}. There is some error in the code, since the euclidean fitness score is in the range of 1e6. Since this too takes up a lot of time, this has been commented. 
 \end{itemize}
 \end{document}
